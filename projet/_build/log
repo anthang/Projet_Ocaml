@@ -1,0 +1,44 @@
+# dune build
+# OCAMLPARAM: unset
+# Shared cache: enabled-except-user-rules
+# Shared cache location: /home/anthang/.cache/dune/db
+# Workspace root: /mnt/c/Users/antho/Desktop/2024-2025/Projet_Ocaml/projet
+# Auto-detected concurrency: 8
+# Dune context:
+#  { name = "default"
+#  ; kind = "default"
+#  ; profile = Release
+#  ; merlin = true
+#  ; fdo_target_exe = None
+#  ; build_dir = In_build_dir "default"
+#  ; instrument_with = []
+#  }
+$ /home/anthang/.opam/4.14.1/bin/ocamlc.opt -config > /tmp/dune_34356a_output
+$ /home/anthang/.opam/4.14.1/bin/js_of_ocaml --version > /tmp/dune_fa12c2_output
+$ (cd _build/default && /home/anthang/.opam/4.14.1/bin/ocamlc.opt -w -40 -w -49 -nopervasives -nostdlib -g -bin-annot -I lib/ecs/.ecs.objs/byte -no-alias-deps -o lib/ecs/.ecs.objs/byte/ecs.cmo -c -impl lib/ecs/ecs.ml-gen)
+$ (cd _build/default && /home/anthang/.opam/4.14.1/bin/ocamldep.opt -modules -impl lib/ecs/system.ml) > _build/default/lib/ecs/.ecs.objs/ecs__System.impl.d
+$ (cd _build/default && /home/anthang/.opam/4.14.1/bin/ocamlc.opt -w -40 -w -49 -nopervasives -nostdlib -g -bin-annot -I lib/gfx/gfx_jsoo/.gfx_jsoo.objs/byte -no-alias-deps -o lib/gfx/gfx_jsoo/.gfx_jsoo.objs/byte/gfx__gfx_jsoo__.cmo -c -impl lib/gfx/gfx_jsoo/gfx__gfx_jsoo__.ml-gen)
+$ (cd _build/default && /home/anthang/.opam/4.14.1/bin/ocamldep.opt -modules -intf lib/ecs/component.mli) > _build/default/lib/ecs/.ecs.objs/ecs__Component.intf.d
+$ (cd _build/default && /home/anthang/.opam/4.14.1/bin/ocamldep.opt -modules -intf lib/ecs/entity.mli) > _build/default/lib/ecs/.ecs.objs/ecs__Entity.intf.d
+$ (cd _build/default && /home/anthang/.opam/4.14.1/bin/ocamldep.opt -modules -impl lib/ecs/component.ml) > _build/default/lib/ecs/.ecs.objs/ecs__Component.impl.d
+$ (cd _build/default && /home/anthang/.opam/4.14.1/bin/ocamldep.opt -modules -impl lib/ecs/entity.ml) > _build/default/lib/ecs/.ecs.objs/ecs__Entity.impl.d
+$ (cd _build/default && /home/anthang/.opam/4.14.1/bin/ocamldep.opt -modules -intf lib/ecs/system.mli) > _build/default/lib/ecs/.ecs.objs/ecs__System.intf.d
+$ (cd _build/default && /home/anthang/.opam/4.14.1/bin/ocamlc.opt -w -40 -g -bin-annot -I lib/ecs/.ecs.objs/byte -no-alias-deps -open Ecs -o lib/ecs/.ecs.objs/byte/ecs__Component.cmi -c -intf lib/ecs/component.mli)
+$ (cd _build/default && /home/anthang/.opam/4.14.1/bin/ocamlc.opt -w -40 -g -bin-annot -I lib/ecs/.ecs.objs/byte -no-alias-deps -open Ecs -o lib/ecs/.ecs.objs/byte/ecs__Entity.cmi -c -intf lib/ecs/entity.mli)
+$ (cd _build/default && /home/anthang/.opam/4.14.1/bin/ocamlc.opt -w -40 -g -bin-annot -I lib/ecs/.ecs.objs/byte -intf-suffix .ml -no-alias-deps -open Ecs -o lib/ecs/.ecs.objs/byte/ecs__Component.cmo -c -impl lib/ecs/component.ml)
+$ (cd _build/default && /home/anthang/.opam/4.14.1/bin/ocamlc.opt -w -40 -g -bin-annot -I lib/ecs/.ecs.objs/byte -no-alias-deps -open Ecs -o lib/ecs/.ecs.objs/byte/ecs__System.cmi -c -intf lib/ecs/system.mli)
+$ (cd _build/default && /home/anthang/.opam/4.14.1/bin/ocamlc.opt -w -40 -g -bin-annot -I lib/ecs/.ecs.objs/byte -intf-suffix .ml -no-alias-deps -open Ecs -o lib/ecs/.ecs.objs/byte/ecs__Entity.cmo -c -impl lib/ecs/entity.ml)
+$ (cd _build/default && /home/anthang/.opam/4.14.1/bin/ocamlc.opt -w -40 -g -bin-annot -I lib/ecs/.ecs.objs/byte -intf-suffix .ml -no-alias-deps -open Ecs -o lib/ecs/.ecs.objs/byte/ecs__System.cmo -c -impl lib/ecs/system.ml)
+$ (cd _build/default && /home/anthang/.opam/4.14.1/bin/ocamlc.opt -w -40 -g -a -o lib/ecs/ecs.cma lib/ecs/.ecs.objs/byte/ecs.cmo lib/ecs/.ecs.objs/byte/ecs__Entity.cmo lib/ecs/.ecs.objs/byte/ecs__System.cmo lib/ecs/.ecs.objs/byte/ecs__Component.cmo)
+$ (cd _build/default && /home/anthang/.opam/4.14.1/bin/ocamlc.opt -g -w -24 -I .ppx/7b799aed44581cc79b02033532c5f775 -I /home/anthang/.opam/4.14.1/lib/js_of_ocaml-ppx -I /home/anthang/.opam/4.14.1/lib/js_of_ocaml-ppx/as-lib -I /home/anthang/.opam/4.14.1/lib/ocaml-compiler-libs/common -I /home/anthang/.opam/4.14.1/lib/ocaml-compiler-libs/shadow -I /home/anthang/.opam/4.14.1/lib/ocaml/compiler-libs -I /home/anthang/.opam/4.14.1/lib/ppx_derivers -I /home/anthang/.opam/4.14.1/lib/ppxlib -I /home/anthang/.opam/4.14.1/lib/ppxlib/ast -I /home/anthang/.opam/4.14.1/lib/ppxlib/astlib -I /home/anthang/.opam/4.14.1/lib/ppxlib/print_diff -I /home/anthang/.opam/4.14.1/lib/ppxlib/stdppx -I /home/anthang/.opam/4.14.1/lib/ppxlib/traverse_builtins -I /home/anthang/.opam/4.14.1/lib/sexplib0 -I /home/anthang/.opam/4.14.1/lib/stdlib-shims -no-alias-deps -o .ppx/7b799aed44581cc79b02033532c5f775/dune__exe___ppx.cmo -c -impl .ppx/7b799aed44581cc79b02033532c5f775/_ppx.ml-gen)
+$ (cd _build/default && /home/anthang/.opam/4.14.1/bin/ocamldep.opt -modules -impl lib/gfx/gfx_base.ml) > _build/default/lib/gfx/.gfx.objs/gfx__Gfx_base.impl.d
+$ (cd _build/default && /home/anthang/.opam/4.14.1/bin/ocamlopt.opt -g -w -24 -I .ppx/7b799aed44581cc79b02033532c5f775 -I /home/anthang/.opam/4.14.1/lib/js_of_ocaml-ppx -I /home/anthang/.opam/4.14.1/lib/js_of_ocaml-ppx/as-lib -I /home/anthang/.opam/4.14.1/lib/ocaml-compiler-libs/common -I /home/anthang/.opam/4.14.1/lib/ocaml-compiler-libs/shadow -I /home/anthang/.opam/4.14.1/lib/ocaml/compiler-libs -I /home/anthang/.opam/4.14.1/lib/ppx_derivers -I /home/anthang/.opam/4.14.1/lib/ppxlib -I /home/anthang/.opam/4.14.1/lib/ppxlib/ast -I /home/anthang/.opam/4.14.1/lib/ppxlib/astlib -I /home/anthang/.opam/4.14.1/lib/ppxlib/print_diff -I /home/anthang/.opam/4.14.1/lib/ppxlib/stdppx -I /home/anthang/.opam/4.14.1/lib/ppxlib/traverse_builtins -I /home/anthang/.opam/4.14.1/lib/sexplib0 -I /home/anthang/.opam/4.14.1/lib/stdlib-shims -intf-suffix .ml-gen -no-alias-deps -o .ppx/7b799aed44581cc79b02033532c5f775/dune__exe___ppx.cmx -c -impl .ppx/7b799aed44581cc79b02033532c5f775/_ppx.ml-gen)
+$ (cd _build/default && /home/anthang/.opam/4.14.1/bin/ocamldep.opt -modules -intf lib/gfx/gfx.mli) > _build/default/lib/gfx/.gfx.objs/gfx.intf.d
+$ (cd _build/default && /home/anthang/.opam/4.14.1/bin/ocamlc.opt -w -40 -w -49 -nopervasives -nostdlib -g -bin-annot -I lib/gfx/.gfx.objs/byte -no-alias-deps -o lib/gfx/.gfx.objs/byte/gfx__.cmo -c -impl lib/gfx/gfx__.ml-gen)
+$ (cd _build/default && /home/anthang/.opam/4.14.1/bin/ocamlc.opt -w -40 -g -bin-annot -I lib/gfx/.gfx.objs/byte -no-alias-deps -open Gfx__ -o lib/gfx/.gfx.objs/byte/gfx__Gfx_base.cmo -c -impl lib/gfx/gfx_base.ml)
+$ (cd _build/default && /home/anthang/.opam/4.14.1/bin/ocamlc.opt -w -40 -g -bin-annot -I lib/gfx/.gfx.objs/byte -no-alias-deps -opaque -open Gfx__ -o lib/gfx/.gfx.objs/byte/gfx.cmi -c -intf lib/gfx/gfx.mli)
+$ (cd _build/default && /home/anthang/.opam/4.14.1/bin/ocamlopt.opt -g -w -24 -o .ppx/7b799aed44581cc79b02033532c5f775/ppx.exe /home/anthang/.opam/4.14.1/lib/ocaml/compiler-libs/ocamlcommon.cmxa /home/anthang/.opam/4.14.1/lib/ocaml-compiler-libs/common/ocaml_common.cmxa /home/anthang/.opam/4.14.1/lib/ppxlib/astlib/astlib.cmxa /home/anthang/.opam/4.14.1/lib/stdlib-shims/stdlib_shims.cmxa /home/anthang/.opam/4.14.1/lib/ppxlib/ast/ppxlib_ast.cmxa /home/anthang/.opam/4.14.1/lib/ocaml-compiler-libs/shadow/ocaml_shadow.cmxa /home/anthang/.opam/4.14.1/lib/ppxlib/print_diff/ppxlib_print_diff.cmxa /home/anthang/.opam/4.14.1/lib/ppx_derivers/ppx_derivers.cmxa /home/anthang/.opam/4.14.1/lib/ppxlib/traverse_builtins/ppxlib_traverse_builtins.cmxa /home/anthang/.opam/4.14.1/lib/sexplib0/sexplib0.cmxa /home/anthang/.opam/4.14.1/lib/ppxlib/stdppx/stdppx.cmxa /home/anthang/.opam/4.14.1/lib/ppxlib/ppxlib.cmxa /home/anthang/.opam/4.14.1/lib/js_of_ocaml-ppx/as-lib/ppx_js.cmxa /home/anthang/.opam/4.14.1/lib/js_of_ocaml-ppx/ppx_js_rewriter.cmxa .ppx/7b799aed44581cc79b02033532c5f775/dune__exe___ppx.cmx)
+$ (cd _build/default && .ppx/7b799aed44581cc79b02033532c5f775/ppx.exe --cookie 'library-name="gfx_jsoo"' -o lib/gfx/gfx_jsoo/gfx.pp.ml --impl lib/gfx/gfx_jsoo/gfx.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
+$ (cd _build/default && /home/anthang/.opam/4.14.1/bin/ocamldep.opt -modules -impl lib/gfx/gfx_jsoo/gfx.pp.ml) > _build/default/lib/gfx/gfx_jsoo/.gfx_jsoo.objs/gfx.impl.d
+$ (cd _build/default && /home/anthang/.opam/4.14.1/bin/ocamlc.opt -w -40 -g -bin-annot -I lib/gfx/gfx_jsoo/.gfx_jsoo.objs/byte -I /home/anthang/.opam/4.14.1/lib/js_of_ocaml -I /home/anthang/.opam/4.14.1/lib/js_of_ocaml-compiler/runtime -I lib/gfx/.gfx.objs/byte -intf-suffix .ml -no-alias-deps -open Gfx__gfx_jsoo__ -o lib/gfx/gfx_jsoo/.gfx_jsoo.objs/byte/gfx.cmo -c -impl lib/gfx/gfx_jsoo/gfx.pp.ml)
+$ (cd _build/default && /home/anthang/.opam/4.14.1/bin/ocamlc.opt -w -40 -g -a -o lib/gfx/gfx_jsoo/gfx_jsoo.cma lib/gfx/gfx_jsoo/.gfx_jsoo.objs/byte/gfx__gfx_jsoo__.cmo lib/gfx/gfx_jsoo/.gfx_jsoo.objs/byte/gfx__Gfx_base.cmo lib/gfx/gfx_jsoo/.gfx_jsoo.objs/byte/gfx.cmo lib/gfx/gfx_jsoo/.gfx_jsoo.objs/byte/gfx__.cmo)
