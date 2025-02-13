@@ -63,10 +63,10 @@ let platform_height = 20
 let platform_x=32
 let platform_y=200
 
-let background_x = 0
-let background_y = 0
-let background_width = 30
-let background_height = 30
+let background_x = wall_thickness
+let background_y = wall_thickness
+let background_width = window_width-2*wall_thickness
+let background_height = window_height-2*wall_thickness
 let background_color=Texture.black
 let image_path ="./resources/images/block.png"
 let font_name = if Gfx.backend = "js" then "monospace" else "resources/images/monospace.ttf"
