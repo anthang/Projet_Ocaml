@@ -18,17 +18,23 @@ let player (name, x, y, txt, width, height) =
     match t#tag#get with
     | Wall.HWall w -> 
         (* Calcul de la nouvelle position du joueur *)
-        let new_pos = Vector.{ x = e#position#get.x; y = w#position#get.y-.float_of_int(e#box#get.height) } in
+        if(w#position#get.y=e#position#get.y+.float_of_int(e#box#get.height)) then
+          let new_pos = Vector.{ x = e#position#get.x; y = w#position#get.y-.float_of_int(e#box#get.height) } in
 
-        (* Appliquer la nouvelle position *)
-        e#position#set new_pos;
+          (* Appliquer la nouvelle position *)
+          e#position#set new_pos;
+        else
+          let new_pos = Vector.{ x = e#position#get.x; y = w#position#get.y-.float_of_int(e#box#get.height) } in
 
+          (* Appliquer la nouvelle position *)
+          e#position#set new_pos
   
 
-        | _ ->        
+        |_->
           (* Appliquer une nouvelle vitesse si le joueur ne touche rien *)
           let new_velo = Vector.{ x = e#velocity#get.x; y = e#velocity#get.y +. 0.5 } in
           e#velocity#set new_velo
+        
 
   );
   

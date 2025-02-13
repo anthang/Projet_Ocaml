@@ -102,3 +102,12 @@ class wall () =
     inherit texture ()
     inherit resolver()
   end
+
+  class background () =
+    object
+      inherit Entity.t ()
+      inherit position ()
+      inherit box ()
+      inherit tagged ()
+      inherit texture ()
+    end

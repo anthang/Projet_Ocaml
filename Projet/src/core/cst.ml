@@ -58,14 +58,15 @@ let vwall_color = Texture.yellow
 
 
 let platform_color = Texture.blue
-let platform_thickness = 100
 let platform_width = 100
 let platform_height = 10
 let platform_x=32
 let platform_y=200
 
-
-
-
+let background_x = 0
+let background_y = 0
+let background_width = 10
+let background_height = 20
+let image_path ="./resources/images/block.png"
 let font_name = if Gfx.backend = "js" then "monospace" else "resources/images/monospace.ttf"
 let font_color = Gfx.color 0 0 0 255
