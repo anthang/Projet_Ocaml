@@ -1,0 +1,9 @@
+# Ignorer les fichiers de build
+_build/
+prog/
+*.cma
+*.cmo
+*.cmx
+*.o
+*.js
+*.log
