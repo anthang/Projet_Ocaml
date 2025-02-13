@@ -17,18 +17,25 @@ let player (name, x, y, txt, width, height) =
   e#resolve#set (fun _ t ->
     match t#tag#get with
     | Wall.HWall w -> 
-        (* Calcul de la nouvelle position du joueur *)
-        if(w#position#get.y=e#position#get.y+.float_of_int(e#box#get.height)) then
-          let new_pos = Vector.{ x = e#position#get.x; y = w#position#get.y-.float_of_int(e#box#get.height) } in
 
-          (* Appliquer la nouvelle position *)
+        (*cas ou le player touche le dessous du mur*)
+        if(e#position#get.y>w#position#get.y+.(float_of_int(w#box#get.height))/.2.) then
+          let new_pos = Vector.{ x = e#position#get.x; y = w#position#get.y+.float_of_int(w#box#get.height) } in
           e#position#set new_pos;
-        else
+        
+          (*cas ou le player touche le dessus du mur*)
+        else if(e#position#get.y+.float_of_int(e#box#get.height)<w#position#get.y+.(float_of_int(w#box#get.height))/.2.) then
           let new_pos = Vector.{ x = e#position#get.x; y = w#position#get.y-.float_of_int(e#box#get.height) } in
-
-          (* Appliquer la nouvelle position *)
+          e#position#set new_pos;
+            (*cas ou le player touche le côté droit du mur*)
+        else if(e#position#get.x>w#position#get.x+.(float_of_int(w#box#get.width))/.2.)then 
+          let new_pos = Vector.{ x = w#position#get.x+.float_of_int(w#box#get.width); y = e#position#get.y } in
           e#position#set new_pos
-  
+
+          (*cas ou le player touche le côté gauche du mur*)
+        else
+          let new_pos = Vector.{ x = w#position#get.x-.float_of_int(e#box#get.width); y = e#position#get.y } in
+          e#position#set new_pos
 
         |_->
           (* Appliquer une nouvelle vitesse si le joueur ne touche rien *)
@@ -65,3 +72,6 @@ let move_player player v =
   (* À remplacer en question 7.5, mettre la vitesse
         du joueur à v *)
   
+
+
+
