@@ -20,8 +20,8 @@ let handle_input () =
 let () =
   register "i" (fun () -> Player.(move_player (player1()) Cst.paddle_v_up));
   register "k" (fun () -> Player.(move_player (player1()) Cst.paddle_v_down));
-  register "l" (fun () -> Player.(move_player (player1()) Cst.paddle_v_left));
-  register "j" (fun () -> Player.(move_player (player1()) Cst.paddle_v_right));
+  register "l" (fun () -> Player.(move_player (player1()) Cst.paddle_v_right));
+  register "j" (fun () -> Player.(move_player (player1()) Cst.paddle_v_left));
   register "g" Ball.restart;
   register "s" (fun () ->
       let global = Global.get () in

@@ -24,10 +24,10 @@ let paddle2_y = paddle1_y
 let paddle_color = Texture.blue
 
 let paddle_v_up = Vector.{ x = 0.0; y = -5.0 }
-let paddle_v_left = Vector.{ x = 5.0; y = 0.0 }
+let paddle_v_right = Vector.{ x = 5.0; y = 0.0 }
 let paddle_v_down = Vector.sub Vector.zero paddle_v_up
 
-let paddle_v_right = Vector.sub Vector.zero paddle_v_left
+let paddle_v_left = Vector.sub Vector.zero paddle_v_right
 
 let ball_size = 24
 let ball_color = Texture.red
@@ -59,14 +59,15 @@ let vwall_color = Texture.yellow
 
 let platform_color = Texture.blue
 let platform_width = 100
-let platform_height = 10
+let platform_height = 20
 let platform_x=32
 let platform_y=200
 
 let background_x = 0
 let background_y = 0
-let background_width = 10
-let background_height = 20
+let background_width = 30
+let background_height = 30
+let background_color=Texture.black
 let image_path ="./resources/images/block.png"
 let font_name = if Gfx.backend = "js" then "monospace" else "resources/images/monospace.ttf"
 let font_color = Gfx.color 0 0 0 255
