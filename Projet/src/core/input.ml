@@ -25,7 +25,7 @@ let handle_input () =
 
 
   if not !key_pressed then (
-    Player.(move_player (player1()) Cst.gravitie)
+    Player.(move_player (player1()) Vector.zero)
   )
 
 let () =

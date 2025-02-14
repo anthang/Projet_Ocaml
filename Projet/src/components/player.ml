@@ -67,7 +67,7 @@ let stop_players () =
         à 0 *)
 
 let move_player player v =
-  player#velocity#set v
+  player#velocity#set (Vector.add v Cst.gravitie)
   (* À remplacer en question 7.5, mettre la vitesse
         du joueur à v *)
   
