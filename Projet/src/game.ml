@@ -22,7 +22,7 @@ let run () =
   let _walls = Wall.walls () in
   let player1, player2 = Player.players () in
   let ball = Ball.ball ctx font in
-  let _background = Background.create_background ctx font in 
+  (*let _background = Background.create_background ctx font in *)
   let global = Global.{ window; ctx; player1; player2; ball; waiting = 1} in
   Global.set global;
   Gfx.main_loop update (fun () -> ())

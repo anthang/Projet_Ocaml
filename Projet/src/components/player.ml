@@ -36,10 +36,6 @@ let player (name, x, y, txt, width, height) =
         else
           let new_pos = Vector.{ x = w#position#get.x-.float_of_int(e#box#get.width); y = e#position#get.y } in
           e#position#set new_pos
-    |No_tag->
-      (* Appliquer une nouvelle vitesse si le joueur ne touche rien *)
-      let new_velo = Vector.{ x = e#velocity#get.x; y = e#velocity#get.y +. 0.5 } in
-      e#velocity#set new_velo
     |_->
       (* Appliquer une nouvelle vitesse si le joueur ne touche rien *)
       let new_velo = Vector.{ x = e#velocity#get.x; y = e#velocity#get.y +. 0.5 } in
