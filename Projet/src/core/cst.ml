@@ -25,6 +25,7 @@ let paddle_color = Texture.blue
 
 let paddle_v_up = Vector.{ x = 0.0; y = -5.0 }
 let paddle_v_right = Vector.{ x = 5.0; y = 0.0 }
+let paddle_v_down = Vector.sub Vector.zero paddle_v_up
 let gravitie = Vector.{x=0.;y=1.}
 let paddle_v_left = Vector.sub Vector.zero paddle_v_right
 
