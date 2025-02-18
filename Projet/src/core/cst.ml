@@ -16,8 +16,13 @@ let window_height = 600
 let paddle_width = 24
 let paddle_height = 128
 
+let wall_thickness = 32
+
+let hwall_width = window_width
+let hwall_height = wall_thickness
+
 let paddle1_x = 64 + paddle_width / 2
-let paddle1_y = window_height / 2 - paddle_height / 2
+let paddle1_y = paddle_height+wall_thickness
 
 let paddle2_x = window_width - paddle1_x - paddle_width
 let paddle2_y = paddle1_y
@@ -26,7 +31,7 @@ let paddle_color = Texture.blue
 let paddle_v_up = Vector.{ x = 0.0; y = -5.0 }
 let paddle_v_right = Vector.{ x = 5.0; y = 0.0 }
 let paddle_v_down = Vector.sub Vector.zero paddle_v_up
-let gravitie = Vector.{x=0.;y=0.3}
+let gravitie = Vector.{x=0.;y=0.2}
 let paddle_v_left = Vector.sub Vector.zero paddle_v_right
 
 let ball_size = 24
@@ -36,10 +41,6 @@ let ball_v_offset = window_height / 2 - ball_size / 2
 let ball_left_x = 128 + ball_size / 2
 let ball_right_x = window_width - ball_left_x - ball_size
 
-let wall_thickness = 32
-
-let hwall_width = window_width
-let hwall_height = wall_thickness
 let hwall1_x = 0
 let hwall1_y = 0
 let hwall2_x = 0

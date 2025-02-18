@@ -71,4 +71,12 @@ let move_player player v =
 
 
 
+(*
+let move_player player v =
+  player#resolve#set (fun _ t ->
+    match t#tag#get with
+    | Wall.HWall w -> player#velocity#set (Vector.add (Vector.add v player#velocity#get ) Cst.gravitie)
+    |_->player#velocity#set (Vector.add Cst.gravitie player#velocity#get )
+  );
 
+*)
