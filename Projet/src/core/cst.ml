@@ -22,7 +22,7 @@ let hwall_width = window_width
 let hwall_height = wall_thickness
 
 let paddle1_x = 64 + paddle_width / 2
-let paddle1_y = paddle_height+wall_thickness
+let paddle1_y = window_height-wall_thickness-paddle_height
 
 let paddle2_x = window_width - paddle1_x - paddle_width
 let paddle2_y = paddle1_y
