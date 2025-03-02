@@ -2,6 +2,11 @@
 
 Cette archive contient un squelette permettant de faire le projet de PFA en suivant le modèle ECS.
 
+TODO:
+	-Gerer la non différentation entre saut long et court
+	-remplacer les bloc de couleur par des image
+	-fait la tructure des porte de fin de jeu
+	-...
 
 ## Structure des répertoires 
 
