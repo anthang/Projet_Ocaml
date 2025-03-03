@@ -74,4 +74,3 @@ let font_name = if Gfx.backend = "js" then "monospace" else "resources/images/mo
 let font_color = Gfx.color 0 0 0 255
 
 
-let player_img_res = Gfx.load_image ctx "chemin/vers/votre_image.png"
