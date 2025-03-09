@@ -2,6 +2,10 @@
 
 Cette archive contient un squelette permettant de faire le projet de PFA en suivant le modèle ECS.
 
+cle git : 
+	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
+
+
 TODO:
 	-Gerer la non différentation entre saut long et court
 	-remplacer les bloc de couleur par des image
