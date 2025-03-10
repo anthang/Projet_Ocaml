@@ -1,12 +1,15 @@
 type t = { x : float; y : float; }
 (** The type of 2D Vectors *)
 
+val egal : t -> t -> bool
+val getx : t -> float
+val gety : t -> float
 val add : t -> t -> t
 (** Addition of vectors *)
 
 val sub : t -> t -> t
 (** Subtraction of vectors *)
-
+val multab : t -> t -> t
 val mult : float -> t -> t
 (** Multiplication of a floating point number by a vector *)
 

@@ -79,8 +79,17 @@ class player name =
     inherit tagged ()
     inherit texture ()
     inherit resolver ()
-    inherit velocity()
+    inherit velocity ()
+
+    (* Ajout d'un attribut mutable pour suivre l'état de collision *)
+    val mutable collision = false
+
+    (* Getter pour collision *)
+    method collision = collision
+    (* Setter pour collision *)
+    method set_collision state = collision <- state
   end
+
 
 class ball () =
   object

@@ -31,20 +31,28 @@ let handle_input () =
     | Quit -> exit 0
     | _ -> ()
   in 
+  
+
+  if (Hashtbl.mem table_key_pressed "i" && (Hashtbl.find table_key_pressed "i").current && (Hashtbl.find table_key_pressed "i").last ) then
+    unset_key "i"
+    ;
+
+  
 
   Hashtbl.iter (fun key action ->
     if has_key key then 
-        if (Hashtbl.mem table_key_pressed "i" && (Hashtbl.find table_key_pressed "i").current && (Hashtbl.find table_key_pressed "i").last ) then
-          Player.(move_player (player1()) Cst.gravitie)
-        else
         action ()
       else 
-      Player.(move_player (player1()) Cst.gravitie)
-  ) action_table
+      Player.(move_player (player1()) Vector.zero)
+  ) action_table;
+
+  if(Hashtbl.mem table_key_pressed "i" && not(Hashtbl.find table_key_pressed "i").last) then 
+    Hashtbl.replace table_key_pressed "i" { last = true; current = true }
+
 
 let () =
   register "i" (fun () -> Player.(move_player (player1()) Cst.paddle_v_up));
-  register "k" (fun () -> Player.(move_player (player1()) Cst.paddle_v_down));
+  (*register "k" (fun () -> Player.(move_player (player1()) Cst.paddle_v_down));*)
   register "l" (fun () -> Player.(move_player (player1()) Cst.paddle_v_right));
   register "j" (fun () -> Player.(move_player (player1()) Cst.paddle_v_left));
   register "g" Ball.restart;

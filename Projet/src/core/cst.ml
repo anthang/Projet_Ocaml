@@ -21,18 +21,19 @@ let wall_thickness = 32
 let hwall_width = window_width
 let hwall_height = wall_thickness
 
-let paddle1_x = 64 + paddle_width / 2
+let paddle1_x = window_width/2 + paddle_width / 2
 let paddle1_y = window_height-wall_thickness-paddle_height
 
 let paddle2_x = window_width - paddle1_x - paddle_width
 let paddle2_y = paddle1_y
 let paddle_color = Texture.blue
 
-let paddle_v_up = Vector.{ x = 0.0; y = -5.0 }
-let paddle_v_right = Vector.{ x = 5.0; y = 0.0 }
-let paddle_v_down = Vector.sub Vector.zero paddle_v_up
-let gravitie = Vector.{x=0.;y=0.2}
-let paddle_v_left = Vector.sub Vector.zero paddle_v_right
+let paddle_v_up = Vector.{ x = 0.0; y = -3.0 }
+let paddle_v_right = Vector.{ x = 3.0; y = 0.0 }
+
+(*let paddle_v_down = Vector.sub Vector.zero paddle_v_up*)
+let gravitie = Vector.{x=0.;y=0.05}
+let paddle_v_left = Vector.{ x = -3.0; y = 0.0 }
 
 let ball_size = 24
 let ball_color = Texture.red
@@ -62,7 +63,7 @@ let platform_color = Texture.blue
 let platform_width = 100
 let platform_height = 20
 let platform_x=32
-let platform_y=200
+let platform_y=window_height-wall_thickness-70
 
 let background_x = wall_thickness
 let background_y = wall_thickness

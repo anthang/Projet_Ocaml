@@ -6,6 +6,10 @@ type t = { width : int; height : int }
 (* We use the Minkowski difference of Box1 and Box2:
    https://en.wikipedia.org/wiki/Minkowski_addition#Collision_detection
 *)
+let reflect v n =
+  let dot_product = Vector.dot v n in
+  let normal_reflection = Vector.{ x = n.x *. (2.0 *. dot_product); y = n.y *. (2.0 *. dot_product) } in
+  Vector.{ x = v.x -. normal_reflection.x; y = v.y -. normal_reflection.y }
 
 let mdiff v1 r1 v2 r2 =
   let x = v1.x -. v2.x -. float r2.width in

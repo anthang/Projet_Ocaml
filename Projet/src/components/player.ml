@@ -10,39 +10,50 @@ let player (name, x, y, txt, width, height) =
   e#tag#set Player;
   e#position#set Vector.{x = float x; y = float y};
   e#box#set Rect.{width; height};
-  e#velocity#set Vector.zero;
+  e#velocity#set Cst.gravitie;
   Draw_system.(register (e :> t));
   Collision_system.(register (e :> t));
   Move_system.(register (e :> t));
   e#resolve#set (fun _ t ->
     match t#tag#get with
     | Wall.HWall w -> 
-
-        (*cas ou le player touche le dessous du mur*)
-        if(e#position#get.y>w#position#get.y+.(float_of_int(w#box#get.height))/.2.) then
-          let new_pos = Vector.{ x = e#position#get.x; y = w#position#get.y+.float_of_int(w#box#get.height) } in
-          e#position#set new_pos;
+      begin
+        let player_pos = e#position#get in
+        let player_box = e#box#get in
+        let wall_pos = w#position#get in
+        let wall_box = w#box#get in
+  
+        (* Calcul de la différence Minkowski entre le joueur et le mur *)
+        let s_pos, s_rect = Rect.mdiff player_pos player_box wall_pos wall_box in
         
-          (*cas ou le player touche le dessus du mur*)
-        else if(e#position#get.y+.float_of_int(e#box#get.height)<w#position#get.y+.(float_of_int(w#box#get.height))/.2.) then
-          let new_pos = Vector.{ x = e#position#get.x; y = w#position#get.y-.float_of_int(e#box#get.height) } in
+        if Rect.has_origin s_pos s_rect then
+          let penetration = Rect.penetration_vector s_pos s_rect in
+          let separation = Vector.sub Vector.zero Vector.{ x = penetration.x; y = penetration.y } in
+          
+          (* Appliquer la séparation *)
+          let new_pos = Vector.{ x = player_pos.x +. separation.x; y = player_pos.y +. separation.y } in
           e#position#set new_pos;
-            (*cas ou le player touche le côté droit du mur*)
-        else if(e#position#get.x>w#position#get.x+.(float_of_int(w#box#get.width))/.2.)then 
-          let new_pos = Vector.{ x = w#position#get.x+.float_of_int(w#box#get.width); y = e#position#get.y } in
-          e#position#set new_pos
-
-          (*cas ou le player touche le côté gauche du mur*)
-        else
-          let new_pos = Vector.{ x = w#position#get.x-.float_of_int(e#box#get.width); y = e#position#get.y } in
-          e#position#set new_pos
-    |_->
-      (* Appliquer une nouvelle vitesse si le joueur ne touche rien *)
-      let new_velo = Vector.{ x = e#velocity#get.x; y = e#velocity#get.y +. 0.5 } in
+          
+          (* Réfléchir la vitesse en fonction de la direction de la collision *)
+          let normal = if Rect.is_zero penetration.x then Vector.{ x = 0.0; y = 1.0 } else Vector.{ x = 1.0; y = 0.0 } in
+          let new_velocity = Rect.reflect e#velocity#get normal in
+          e#velocity#set new_velocity;
+          
+          (* Si le joueur touche un mur, on arrête sa vitesse sur l'axe de la collision *)
+          if penetration.y <> 0.0 then e#velocity#set Vector.zero
+      end;
+  
+    (* Cas où il n'y a pas de collision *)
+    | No_tag ->
+      let new_velo = Vector.{ x = e#velocity#get.x; y = Vector.gety Cst.gravitie } in
       e#velocity#set new_velo
-    
-
+  
+    (* Autres collisions ou objets non spécifiques *)
+    | _ ->
+      let new_velo = Vector.{ x = e#velocity#get.x; y = e#velocity#get.y } in
+      e#velocity#set new_velo
   );
+  
   
   (* Question 7.5 enregistrer auprès du Move_system *)
   e
@@ -67,16 +78,21 @@ let stop_players () =
         à 0 *)
 
 let move_player player v =
-  player#velocity#set (Vector.add (Vector.add v player#velocity#get ) Cst.gravitie)
+  (* Affichage du vecteur de vitesse *)
+  (*Gfx.debug "Mon vecteur de vitesse : %a\n" Vector.pp player#velocity#get;*)
+  let new_veloy = 
+    if(Vector.gety player#velocity#get = Vector.gety Cst.gravitie) then
+      Vector.add v player#velocity#get 
+    else
+      Vector.add player#velocity#get Cst.gravitie
+    in
+    
+  let new_velo = Vector.{x=Vector.getx v ; y=Vector.gety new_veloy} in
+  (* Mise à jour de la vélocité *)
+  player#velocity#set  new_velo ;
 
+  (* Mise à jour de la position *)
+  player#position#set  (Vector.add player#position#get player#velocity#get);
+  Gfx.debug "Mon vecteur de vitesse : %a\n" Vector.pp player#velocity#get
 
-
-(*
-let move_player player v =
-  player#resolve#set (fun _ t ->
-    match t#tag#get with
-    | Wall.HWall w -> player#velocity#set (Vector.add (Vector.add v player#velocity#get ) Cst.gravitie)
-    |_->player#velocity#set (Vector.add Cst.gravitie player#velocity#get )
-  );
-
-*)
+        
