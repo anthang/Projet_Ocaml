@@ -23,23 +23,23 @@ let player (name, x, y, txt, width, height) =
         let wall_pos = w#position#get in
         let wall_box = w#box#get in
   
-        (* Calcul de la différence Minkowski entre le joueur et le mur *)
+
         let s_pos, s_rect = Rect.mdiff player_pos player_box wall_pos wall_box in
         
         if Rect.has_origin s_pos s_rect then
           let penetration = Rect.penetration_vector s_pos s_rect in
           let separation = Vector.sub Vector.zero Vector.{ x = penetration.x; y = penetration.y } in
           
-          (* Appliquer la séparation *)
+
           let new_pos = Vector.{ x = player_pos.x +. separation.x; y = player_pos.y +. separation.y } in
           e#position#set new_pos;
           
-          (* Réfléchir la vitesse en fonction de la direction de la collision *)
+
           let normal = if Rect.is_zero penetration.x then Vector.{ x = 0.0; y = 1.0 } else Vector.{ x = 1.0; y = 0.0 } in
           let new_velocity = Rect.reflect e#velocity#get normal in
           e#velocity#set new_velocity;
           
-          (* Si le joueur touche un mur, on arrête sa vitesse sur l'axe de la collision *)
+
           if penetration.y <> 0.0 then e#velocity#set Vector.zero
       end;
   
@@ -93,6 +93,6 @@ let move_player player v =
 
   (* Mise à jour de la position *)
   player#position#set  (Vector.add player#position#get player#velocity#get);
-  Gfx.debug "Mon vecteur de vitesse : %a\n" Vector.pp player#velocity#get
+  (*Gfx.debug "Mon vecteur de vitesse : %a\n" Vector.pp player#velocity#get*)
 
         
