@@ -2,12 +2,26 @@ open Ecs
 open Component_defs
 open System_defs
 
-type tag += Player
+type tag += Fire of player | Water of player
 
-let player (name, x, y, txt, width, height) =
-  let e = new player name in
+
+let stop_players () = 
+  let Global.{player1; player2; _ } = Global.get () in
+  player1#velocity#set Vector.zero ;
+  player2#velocity#set Vector.zero  (* À remplacer en question 7.5, mettre la vitesse
+        à 0 *)
+
+let game_over () =
+  Gfx.debug "Game Over ! Ctrl + r pour recommencé";
+  stop_players ();
+  Unix.sleep 3600  (* Attend 2 secondes *)
+
+
+
+let player (name, x, y, txt, width, height,fire) =
+  let e = new player (name) in
   e#texture#set txt;
-  e#tag#set Player;
+  e#tag#set (if(fire) then Fire e else Water e);
   e#position#set Vector.{x = float x; y = float y};
   e#box#set Rect.{width; height};
   e#velocity#set Cst.gravitie;
@@ -16,7 +30,7 @@ let player (name, x, y, txt, width, height) =
   Move_system.(register (e :> t));
   e#resolve#set (fun _ t ->
     match t#tag#get with
-    | Wall.HWall w -> 
+    | Wall.Wall w -> 
       begin
         let player_pos = e#position#get in
         let player_box = e#box#get in
@@ -40,13 +54,26 @@ let player (name, x, y, txt, width, height) =
           e#velocity#set new_velocity;
           
 
-          if penetration.y <> 0.0 then e#velocity#set Vector.zero
-      end;
+          if penetration.y <> 0.0 then e#velocity#set Cst.gravitie
+      end
+      ;
+
+      | Piege.FPiege fp -> if e#tag#get = Water  e then begin
+        Draw_system.(unregister (e :> t));  
+        game_over();
+      end
+    else
+      ()
+
+      | Piege.WPiege wp -> if e#tag#get = Fire e then begin
+        Draw_system.(unregister (e :> t));  
+        Gfx.debug"Perdue";
+        game_over();
+      end
+    else
+      ()
+
   
-    (* Cas où il n'y a pas de collision *)
-    | No_tag ->
-      let new_velo = Vector.{ x = e#velocity#get.x; y = Vector.gety Cst.gravitie } in
-      e#velocity#set new_velo
   
     (* Autres collisions ou objets non spécifiques *)
     | _ ->
@@ -59,8 +86,8 @@ let player (name, x, y, txt, width, height) =
   e
 
 let players () =  
-  player  Cst.("player1", paddle1_x, paddle1_y, paddle_color, paddle_width, paddle_height),
-  player  Cst.("player2", paddle2_x, paddle2_y, paddle_color, paddle_width, paddle_height)
+  player  Cst.("Fire", paddle1_x, paddle1_y, Texture.red, paddle_width, paddle_height,true),
+  player  Cst.("Water", paddle2_x, paddle2_y, Texture.blue, paddle_width, paddle_height,false)
 
 
 let player1 () = 
@@ -71,14 +98,16 @@ let player2 () =
   let Global.{player2; _ } = Global.get () in
   player2
 
-let stop_players () = 
-  let Global.{player1; player2; _ } = Global.get () in
-  player1#velocity#set Vector.zero ;
-  player2#velocity#set Vector.zero  (* À remplacer en question 7.5, mettre la vitesse
-        à 0 *)
 
+
+
+
+
+          
+
+(*
 let move_player player v =
-  (* Affichage du vecteur de vitesse *)
+
   (*Gfx.debug "Mon vecteur de vitesse : %a\n" Vector.pp player#velocity#get;*)
   let new_veloy = 
     if(Vector.gety player#velocity#get = Vector.gety Cst.gravitie) then
@@ -88,11 +117,28 @@ let move_player player v =
     in
     
   let new_velo = Vector.{x=Vector.getx v ; y=Vector.gety new_veloy} in
-  (* Mise à jour de la vélocité *)
+
   player#velocity#set  new_velo ;
 
-  (* Mise à jour de la position *)
+
   player#position#set  (Vector.add player#position#get player#velocity#get);
   (*Gfx.debug "Mon vecteur de vitesse : %a\n" Vector.pp player#velocity#get*)
 
-        
+  *)
+  
+
+  let move_player player v =
+
+    (*Gfx.debug "Mon vecteur de vitesse : %a\n" Vector.pp player#velocity#get;*)
+    let new_veloy = 
+
+        Vector.add (Vector.add v player#velocity#get) Cst.gravitie
+      in
+      
+    let new_velo = Vector.{x=Vector.getx v ; y=Vector.gety new_veloy} in
+  
+    player#velocity#set  new_velo ;
+  
+  
+    player#position#set  (Vector.add player#position#get player#velocity#get);
+    (*Gfx.debug "Mon vecteur de vitesse : %a\n" Vector.pp player#velocity#get*)

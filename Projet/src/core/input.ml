@@ -55,7 +55,7 @@ let () =
   (*register "k" (fun () -> Player.(move_player (player1()) Cst.paddle_v_down));*)
   register "l" (fun () -> Player.(move_player (player1()) Cst.paddle_v_right));
   register "j" (fun () -> Player.(move_player (player1()) Cst.paddle_v_left));
-  register "g" Ball.restart;
+  (*register "g" Ball.restart;*)
   register "s" (fun () ->
       let global = Global.get () in
       global.waiting <- 1;

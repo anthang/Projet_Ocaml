@@ -113,3 +113,35 @@ class wall () =
       inherit tagged ()
       inherit texture ()
     end
+
+
+    class diamont () =
+    object
+      inherit Entity.t ()
+      inherit position ()
+      inherit box ()
+      inherit tagged ()
+      inherit texture ()
+      inherit resolver ()
+    end
+
+
+    class door () =
+    object
+      inherit Entity.t ()
+      inherit position ()
+      inherit box ()
+      inherit tagged ()
+      inherit texture ()
+      inherit resolver()
+    end
+
+    class piege () =
+    object
+      inherit Entity.t ()
+      inherit position ()
+      inherit box ()
+      inherit tagged ()
+      inherit texture ()
+      inherit resolver()
+    end

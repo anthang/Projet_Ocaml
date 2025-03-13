@@ -1,3 +1,5 @@
+
+(*
 open Ecs
 open Component_defs
 open System_defs
@@ -16,7 +18,7 @@ let ball ctx font =
   Move_system.(register (e :> t));
   e#resolve#set (fun n t ->
     match t#tag#get with
-    Wall.HWall _ | Player.Player -> (* ici la balle est en collision
+    Wall.HWall _ | Player.Fire _|Player.Water _ -> (* ici la balle est en collision
     avec un des murs horizontaux ou une des raquettes.
     Le vecteur n passé en argument contient soit { x = -1.0; y = 1.0 }
     soit { x = 1.0; y = -1.0 }. Il suffit de le multiplier à la
@@ -62,3 +64,6 @@ let restart () =
           la vitesse de global.ball à v   
     *)
   end
+
+
+  *)
