@@ -18,7 +18,7 @@ let run () =
   in
   let window = Gfx.create  window_spec in
   let ctx = Gfx.get_context window in
-  let font = Gfx.load_font Cst.font_name "" 128 in
+  (*let font = Gfx.load_font Cst.font_name "" 128 in*)
   let _walls = Wall.walls () in
   let player1, player2 = Player.players () in
   (*let ball = Ball.ball ctx font in*)

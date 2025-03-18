@@ -13,8 +13,9 @@ let stop_players () =
 
 let game_over () =
   Gfx.debug "Game Over ! Ctrl + r pour recommencé";
+  (*Gfx.debug "score : %a\n%!" Vector.pp player#velocity#get; *)
   stop_players ();
-  Unix.sleep 3600  (* Attend 2 secondes *)
+  Unix.sleep 1  
 
 
 
@@ -100,40 +101,21 @@ let player2 () =
 
 
 
-
-
-
-          
-
-(*
-let move_player player v =
-
-  (*Gfx.debug "Mon vecteur de vitesse : %a\n" Vector.pp player#velocity#get;*)
-  let new_veloy = 
-    if(Vector.gety player#velocity#get = Vector.gety Cst.gravitie) then
-      Vector.add v player#velocity#get 
-    else
-      Vector.add player#velocity#get Cst.gravitie
-    in
-    
-  let new_velo = Vector.{x=Vector.getx v ; y=Vector.gety new_veloy} in
-
-  player#velocity#set  new_velo ;
-
-
-  player#position#set  (Vector.add player#position#get player#velocity#get);
-  (*Gfx.debug "Mon vecteur de vitesse : %a\n" Vector.pp player#velocity#get*)
-
-  *)
-  
-
   let move_player player v =
 
-    (*Gfx.debug "Mon vecteur de vitesse : %a\n" Vector.pp player#velocity#get;*)
-    let new_veloy = 
 
-        Vector.add (Vector.add v player#velocity#get) Cst.gravitie
+    let new_v = 
+        if(Vector.gety player#velocity#get >= 0.1&&Vector.gety player#velocity#get <=0.3) then(
+          (*Gfx.debug "Mon vecteur de vitesse : %a\n" Vector.pp player#velocity#get;*)
+          v
+          )
+        else(
+          Gfx.debug"0\n%!";
+          Vector.zero
+        )
       in
+
+    let new_veloy = Vector.add (Vector.add new_v player#velocity#get) Cst.gravitie in
       
     let new_velo = Vector.{x=Vector.getx v ; y=Vector.gety new_veloy} in
   
@@ -141,4 +123,4 @@ let move_player player v =
   
   
     player#position#set  (Vector.add player#position#get player#velocity#get);
-    (*Gfx.debug "Mon vecteur de vitesse : %a\n" Vector.pp player#velocity#get*)
+
