@@ -15,14 +15,15 @@ let swall (dx, dy, txt, width, height, fx, fy) =
   e#tag#set (SWall e);
   e#box#set Rect.{ width; height };
   e#velocity#set Vector.zero;
+  Collision_system.(register (e :> t));
   Draw_system.(register (e :> t));
   e
 
 
 let swalls () =
   let swall_list = List.map swall Cst.[
-    (75, 75, Texture.yellow, 20, 10, 600, 100);
-    (100, 50, Texture.red, 10, 20, 200, 500);
+    (100, 100, Texture.yellow, 20, 10,600, 100);
+    
   ] in
 
   List.iteri (fun i sw ->

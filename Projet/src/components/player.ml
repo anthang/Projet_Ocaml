@@ -80,6 +80,33 @@ let player (name, x, y, txt, width, height,fire) =
       end
     else
       ()
+      |Sinking_wall.SWall sw -> 
+        begin
+          let player_pos = e#position#get in
+          let player_box = e#box#get in
+          let wall_pos = sw#position#get in
+          let wall_box = sw#box#get in
+    
+  
+          let s_pos, s_rect = Rect.mdiff player_pos player_box wall_pos wall_box in
+          
+          if Rect.has_origin s_pos s_rect then
+            let penetration = Rect.penetration_vector s_pos s_rect in
+            let separation = Vector.sub Vector.zero Vector.{ x = penetration.x; y = penetration.y } in
+            
+  
+            let new_pos = Vector.{ x = player_pos.x +. separation.x; y = player_pos.y +. separation.y } in
+            e#position#set new_pos;
+            
+  
+            let normal = if Rect.is_zero penetration.x then Vector.{ x = 0.0; y = 1.0 } else Vector.{ x = 1.0; y = 0.0 } in
+            let new_velocity = Rect.reflect e#velocity#get normal in
+            e#velocity#set new_velocity;
+            
+  
+            if penetration.y <> 0.0 then e#velocity#set( Vector.add sw#velocity#get Cst.gravitie)
+        end
+        ;
 
   
   
