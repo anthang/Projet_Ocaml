@@ -6,6 +6,7 @@ let update dt =
   (*let () = Player.stop_players () in*)
   let () = Input.handle_input () in
   let() = Sinking_wall.move_swalls() in
+  let () = Monster.move_monsters()in
   Collision_system.update dt;
   Move_system.update dt;
   Draw_system.update dt;
@@ -29,7 +30,7 @@ let run () =
   let _piege = Piege.pieges () in
   let _sk = Sinking_wall.swalls() in
   let door1, door2 = Door.doors () in
-
+  let _monsters = Monster.monsters() in
   
   let global = Global.{ window; ctx; player1; player2;door1;door2;(** ball;*) waiting = 1} in
   

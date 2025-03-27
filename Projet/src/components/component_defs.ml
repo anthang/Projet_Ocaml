@@ -197,3 +197,16 @@ class wall () =
       inherit texture ()
 
     end
+
+    class monster () =
+    object
+      inherit Entity.t ()
+      inherit position ()
+      inherit position_fin ()
+      inherit position_origin ()
+      inherit box ()
+      inherit velocity()
+      inherit tagged ()
+      inherit texture ()
+      inherit resolver()
+    end

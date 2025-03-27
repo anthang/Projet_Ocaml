@@ -68,6 +68,7 @@ let player (name, x, y, txt, width, height,fire) =
 
       | Piege.FPiege fp -> if e#tag#get = Water  e then begin
         Draw_system.(unregister (e :> t));  
+        Unix.sleep 1;
         game_over();
       end
     else
@@ -75,7 +76,7 @@ let player (name, x, y, txt, width, height,fire) =
 
       | Piege.WPiege wp -> if e#tag#get = Fire e then begin
         Draw_system.(unregister (e :> t));  
-        Gfx.debug"Perdue";
+        Unix.sleep 1;
         game_over();
       end
     else
@@ -107,6 +108,10 @@ let player (name, x, y, txt, width, height,fire) =
             if penetration.y <> 0.0 then e#velocity#set( Vector.add sw#velocity#get Cst.gravitie)
         end
         ;
+        |Monster.Monster _ ->
+          Draw_system.(unregister (e :> t));  
+          Unix.sleep 1;
+          game_over();
 
   
   
