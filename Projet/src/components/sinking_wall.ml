@@ -1,41 +1,51 @@
 open Component_defs
 open System_defs
 
-type tag += SWall of swall
+type tag += SWall of swall 
 
-let swall (x, y, txt, width, height) =
+
+let swall_table : (int, swall) Hashtbl.t = Hashtbl.create 16
+
+let swall (dx, dy, txt, width, height, fx, fy) =
   let e = new swall () in
   e#texture#set txt;
-  e#position#set Vector.{x = float x; y = float y};
+  e#position_origin#set Vector.{ x = float dx; y = float dy };
+  e#position_fin#set Vector.{ x = float fx; y = float fy };
+  e#position#set Vector.{ x = float dx; y = float dy };
   e#tag#set (SWall e);
-  e#box#set Rect.{width; height};
+  e#box#set Rect.{ width; height };
   e#velocity#set Vector.zero;
   Draw_system.(register (e :> t));
-  Collision_system.(register (e :> t));
   e
 
-let swalls () = 
-    List.map swall Cst.[ 
-      (500, 500, Texture.yellow  , 200, 10); 
-      (500, 500, Texture.yellow, 10, 200); 
-    ]
+
+let swalls () =
+  let swall_list = List.map swall Cst.[
+    (75, 75, Texture.yellow, 20, 10, 600, 100);
+    (100, 50, Texture.red, 10, 20, 200, 500);
+  ] in
+
+  List.iteri (fun i sw ->
+    Hashtbl.add swall_table i sw
+  ) swall_list;
+  swall_list
 
 
-let move_swall swall =
-  let move_max = 50. in 
-  let origin = swall#position_origin#get in
-  let current = swall#position#get in
-  let decal = false in
+let () = ignore (swalls ())
 
-  
 
-  let new_velo = 
-    if Vector.gety current < move_max && decal  then 
-      Vector.{x = 0.5; y = 0.} 
-    else if Vector.gety current> Vector.gety origin then 
-      Vector.{x = -0.5; y = 0.} 
-    else 
-      Vector.zero
-  in
-  
-  swall#position#set (Vector.add current new_velo)
+let move_swalls () =
+  Hashtbl.iter (fun _ sw ->
+    let origin = sw#position_origin#get in
+    let current = sw#position#get in
+    let fin = sw#position_fin#get in
+    let direction = Vector.normalize (Vector.sub fin origin) in
+    let dist_to_origin = Vector.norm (Vector.sub current origin) in
+    let dist_to_fin = Vector.norm (Vector.sub current fin) in
+    if dist_to_fin < 1.0 then
+      sw#velocity#set (Vector.mult (-1.) direction)
+    else if dist_to_origin < 1.0 then
+      sw#velocity#set direction;
+    let new_velo = sw#velocity#get in
+    sw#position#set (Vector.add current new_velo)
+  ) swall_table

@@ -5,6 +5,7 @@ open Ecs
 let update dt =
   (*let () = Player.stop_players () in*)
   let () = Input.handle_input () in
+  let() = Sinking_wall.move_swalls() in
   Collision_system.update dt;
   Move_system.update dt;
   Draw_system.update dt;
