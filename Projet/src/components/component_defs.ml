@@ -210,3 +210,16 @@ class wall () =
       inherit texture ()
       inherit resolver()
     end
+
+
+
+    class portail () =
+    object
+      inherit Entity.t ()
+      inherit position ()
+      inherit position_fin ()
+      inherit box ()
+      inherit tagged ()
+      inherit texture ()
+      inherit resolver()
+    end

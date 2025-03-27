@@ -31,8 +31,9 @@ let run () =
   let _sk = Sinking_wall.swalls() in
   let door1, door2 = Door.doors () in
   let _monsters = Monster.monsters() in
+  let _monsters = Portail.portails() in
   
-  let global = Global.{ window; ctx; player1; player2;door1;door2;(** ball;*) waiting = 1} in
+  let global = Global.{ window; ctx; player1; player2;door1;door2; waiting = 1} in
   
   Global.set global;
 

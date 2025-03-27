@@ -112,7 +112,8 @@ let player (name, x, y, txt, width, height,fire) =
           Draw_system.(unregister (e :> t));  
           Unix.sleep 1;
           game_over();
-
+        |Portail.Portail p ->
+          e#position#set p#position_fin#get
   
   
     (* Autres collisions ou objets non spécifiques *)
