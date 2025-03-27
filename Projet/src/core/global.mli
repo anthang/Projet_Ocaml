@@ -5,6 +5,8 @@ type t = {
   ctx : Gfx.context;
   player1 : player;
   player2 : player;
+  door1 : door;
+  door2 : door;
   (*ball : ball;*)
   mutable waiting : int;
 }

@@ -17,6 +17,12 @@ let game_over () =
   stop_players ();
   Unix.sleep 1  
 
+let player_fin () =
+  let Global.{player1; player2; _ } = Global.get () in
+  player1#position#set Vector.{x=float Cst.paddle1_x; y=float Cst.paddle1_y} ;
+  player2#position#set Vector.{x=float Cst.paddle2_x; y=float Cst.paddle2_y} 
+
+
 
 
 let player (name, x, y, txt, width, height,fire) =
@@ -26,6 +32,7 @@ let player (name, x, y, txt, width, height,fire) =
   e#position#set Vector.{x = float x; y = float y};
   e#box#set Rect.{width; height};
   e#velocity#set Cst.gravitie;
+  e#score#set 0 ;
   Draw_system.(register (e :> t));
   Collision_system.(register (e :> t));
   Move_system.(register (e :> t));
@@ -87,7 +94,7 @@ let player (name, x, y, txt, width, height,fire) =
   e
 
 let players () =  
-  player  Cst.("Fire", paddle1_x, paddle1_y, Texture.red, paddle_width, paddle_height,true),
+  player  Cst.("Fire" , paddle1_x, paddle1_y, Texture.red , paddle_width, paddle_height,true ),
   player  Cst.("Water", paddle2_x, paddle2_y, Texture.blue, paddle_width, paddle_height,false)
 
 
@@ -99,28 +106,47 @@ let player2 () =
   let Global.{player2; _ } = Global.get () in
   player2
 
+let stop = ref false
 
+let switch () = stop := not !stop
 
-  let move_player player v =
+let move_player player v =
+  (*
+  Gfx.debug "move ! %s (%f.2)\n%!" (match Vector.gety v with
+  | u when u<0. -> "up"
+  | d when d>0. -> "down"
+  | _ -> "horiz" ) (Vector.gety v);
+  Gfx.debug "player ! %s \n%!" (match player#tag#get  with
+  | Fire f  -> "fire"
+  | Water w  -> "water"
+  | _ -> "none" ) ;
 
+  *)
 
-    let new_v = 
-        if(Vector.gety player#velocity#get >= 0.1&&Vector.gety player#velocity#get <=0.3) then(
-          (*Gfx.debug "Mon vecteur de vitesse : %a\n" Vector.pp player#velocity#get;*)
-          v
-          )
-        else(
-          Gfx.debug"0\n%!";
-          Vector.zero
-        )
-      in
-
-    let new_veloy = Vector.add (Vector.add new_v player#velocity#get) Cst.gravitie in
-      
-    let new_velo = Vector.{x=Vector.getx v ; y=Vector.gety new_veloy} in
+  let new_v = 
+    if(Vector.gety player#velocity#get >= 0.1
+      &&Vector.gety player#velocity#get <=0.3) then(
+      v
+    ) else
+      Vector.zero
+  in
+  let new_veloy = Vector.add (Vector.add new_v player#velocity#get)
+                               Cst.gravitie in
+  let new_velo = Vector.{x=Vector.getx v ; y=Vector.gety new_veloy} in
   
-    player#velocity#set  new_velo ;
+  player#velocity#set  new_velo;
   
-  
-    player#position#set  (Vector.add player#position#get player#velocity#get);
+  player#position#set  (Vector.add player#position#get player#velocity#get)
 
+
+
+    let get_score() = 
+    let p1 = player1() in
+    let p2 = player2() in
+    (p1#score#get, p2#score#get)
+
+
+    let get_position() = 
+    let p1 = player1() in
+    let p2 = player2() in
+    (p1#position#get, p2#position#get)

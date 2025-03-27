@@ -4,6 +4,31 @@ open System_defs
 
 type tag += DoorW of door | DoorF of door
 
+
+
+let door1 () = 
+  let Global.{door1; _ } = Global.get () in
+ door1
+
+let door2 () =
+  let Global.{door2; _ } = Global.get () in
+ door2
+
+let get_position() = 
+let d1 = door1() in
+let d2 = door2() in
+(d1#position#get, d2#position#get)
+
+
+let collisions d p =
+  (Vector.gety d < Vector.gety p) &&( Vector.gety p < Vector.gety d +. float(Cst.door_height))
+  
+  && 
+  
+  (Vector.getx d < Vector.getx p) && (Vector.getx p < Vector.getx d +. float(Cst.door_width))
+
+
+
 let door (x, y,h,w, txt, fire) =
   let e = new door () in
   e#texture#set txt;
@@ -13,39 +38,18 @@ let door (x, y,h,w, txt, fire) =
   Draw_system.(register (e :> t));
   Collision_system.(register (e :> t));
 
-
-  let fire_touched = ref false in
-  let water_touched = ref false in
-
-
   e#resolve#set (fun _ t ->
-    match t#tag#get with
-    | Player.Fire f -> 
-        if e#tag#get = DoorF e then begin
-          fire_touched := true;  
-          if !fire_touched && !water_touched then
-            Gfx.debug"2\n";
-        end else begin
-          fire_touched := false; 
-          Gfx.debug"3\n";
-        end
-    | Player.Water w -> 
-        if e#tag#get = DoorW e then begin
-          water_touched := true; 
-
-          if !fire_touched && !water_touched then
-            Gfx.debug"1\n";
-        end else begin
-          Gfx.debug"0\n";
-        end
-    | _ -> ()
+    let d1, d2 = get_position() in 
+    let p1, p2 = Player.get_position() in
+    if(collisions d1 p1 && collisions d2 p2) then 
+        Player.player_fin()
+  else
+      ()
   );
-  
   e
 
+
 let doors () = 
-  List.map door
-    Cst.[ 
-      (doorf_x, doorf_y,door_height,door_width, doorf_color, true);
-      (doorw_x, doorw_y,door_height,door_width, doorw_color, false);
-    ]
+      door Cst.(doorf_x, doorf_y,door_height,door_width, doorf_color, true),
+      door Cst.(doorw_x, doorw_y,door_height,door_width, doorw_color, false)
+

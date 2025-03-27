@@ -4,6 +4,23 @@ class position () =
   object
     method position = r
   end
+  class position_origin () =
+  let r = Component.init Vector.zero in
+  object
+    method position_origin = r
+  end
+  class score () =
+  let r = Component.init (0) in
+  object
+    method score = r
+  end
+
+  class position_fin () =
+  let r = Component.init Vector.zero in
+  object
+    method position_fin = r
+  end
+
 
 class box () =
   let r = Component.init Rect.{width = 0; height = 0} in
@@ -80,6 +97,7 @@ class player name =
     inherit texture ()
     inherit resolver ()
     inherit velocity ()
+    inherit score()
 
   end
 
@@ -144,4 +162,38 @@ class wall () =
       inherit tagged ()
       inherit texture ()
       inherit resolver()
+    end
+
+
+  class swall () =
+    object
+      inherit Entity.t ()
+      inherit position ()
+      inherit position_fin ()
+      inherit position_origin ()
+      inherit box ()
+      inherit velocity()
+      inherit tagged ()
+      inherit texture ()
+      inherit resolver()
+    end
+
+
+  class resultat () =
+    object
+      inherit Entity.t ()
+      inherit position ()
+      inherit box ()
+      inherit tagged ()
+      inherit texture ()
+
+    end
+
+  class fin () =
+    object
+      inherit Entity.t ()
+      inherit position ()
+      inherit box ()
+      inherit texture ()
+
     end
