@@ -19,7 +19,7 @@ let swall (dx, dy, txt, width, height, fx, fy) =
   Draw_system.(register (e :> t));
   e
 
-
+(*
 let swalls () =
   let swall_list = List.map swall Cst.[
     (100, 100, Texture.yellow, 20, 10,600, 100);
@@ -31,9 +31,7 @@ let swalls () =
   ) swall_list;
   swall_list
 
-
-let () = ignore (swalls ())
-
+*)
 
 let move_swalls () =
   Hashtbl.iter (fun _ sw ->

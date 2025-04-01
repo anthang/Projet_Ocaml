@@ -12,7 +12,7 @@ let wall (x, y, txt, width, height) =
   Draw_system.(register (e :> t));
   Collision_system.(register (e :> t));
   e
-
+(*
 let walls () = 
   (*
   Random.self_init ();
@@ -63,5 +63,8 @@ let walls () =
   let lis = generate_wall 5 Cst.diamontf_colo in
 
   lis@lst
+
+  *)
+
 
   *)

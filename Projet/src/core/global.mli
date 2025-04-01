@@ -8,6 +8,7 @@ type t = {
   door1 : door;
   door2 : door;
   (*ball : ball;*)
+  current_level : int;
   mutable waiting : int;
 }
 

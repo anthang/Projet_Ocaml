@@ -30,7 +30,7 @@ let diamont (x, y, txt, fire) =
     | _ -> ()
   );
   e
-
+(*
 let diamonts () =
   (*
   Random.self_init ();
@@ -63,3 +63,4 @@ let diamonts () =
 
     (350, 100 - 20, diamontw_color, false);  
   ]
+*)

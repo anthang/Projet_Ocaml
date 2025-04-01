@@ -3,7 +3,7 @@ open System_defs
 
 type tag += Monster of monster
 
-let monster_table : (int, monster) Hashtbl.t = Hashtbl.create 16
+let monster_table : (unit, monster) Hashtbl.t = Hashtbl.create 16
 
 let monster (dx, dy, txt, width, height, fx, fy) =
   let e = new monster () in
@@ -17,7 +17,7 @@ let monster (dx, dy, txt, width, height, fx, fy) =
   Collision_system.(register (e :> t));
   Draw_system.(register (e :> t));
   e
-
+(*
 let monsters () =
   let monster_list = List.map monster Cst.[
     (520, 170, Texture.black, 20, 10, 650, 170);
@@ -28,7 +28,7 @@ let monsters () =
   monster_list
 
 let () = ignore (monsters ())
-
+*)
 let move_monsters () =
   Hashtbl.iter (fun _ m ->
     let start_pos = m#position_origin#get in

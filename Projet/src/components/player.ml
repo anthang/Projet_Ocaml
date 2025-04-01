@@ -130,7 +130,6 @@ let players () =
   player  Cst.("Fire" , paddle1_x, paddle1_y, Texture.red , paddle_width, paddle_height,true ),
   player  Cst.("Water", paddle2_x, paddle2_y, Texture.blue, paddle_width, paddle_height,false)
 
-
 let player1 () = 
   let Global.{player1; _ } = Global.get () in
   player1
@@ -179,7 +178,7 @@ let move_player player v =
     (p1#score#get, p2#score#get)
 
 
-    let get_position() = 
+    let get_positionP() = 
     let p1 = player1() in
     let p2 = player2() in
     (p1#position#get, p2#position#get)

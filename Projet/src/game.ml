@@ -13,6 +13,7 @@ let update dt =
   
   None
 
+
 let run () =
   let window_spec = 
     Format.sprintf "game_canvas:%dx%d:"
@@ -23,18 +24,23 @@ let run () =
 
 
   (*let font = Gfx.load_font Cst.font_name "" 128 in*)
+  (*
   let _walls = Wall.walls () in
-  let player1, player2 = Player.players () in
+
   (*let ball = Ball.ball ctx font in*)
   let _diamont = Diamont.diamonts () in
   let _piege = Piege.pieges () in
   let _sk = Sinking_wall.swalls() in
-  let door1, door2 = Door.doors () in
+
   let _monsters = Monster.monsters() in
   let _monsters = Portail.portails() in
+  *)
+  Level.load_level 1 ;
+
+  let player1, player2 = Player.players () in
+  let door1, door2 = Door.doors ()  in
   
-  let global = Global.{ window; ctx; player1; player2;door1;door2; waiting = 1} in
+  let global = Global.{ window; ctx; player1; player2;door1;door2; waiting = 1;current_level = 1} in
   
   Global.set global;
-
   Gfx.main_loop update (fun () -> ())

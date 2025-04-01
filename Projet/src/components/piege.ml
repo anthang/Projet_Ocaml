@@ -14,7 +14,7 @@ let piege (x, y, txt, width, height, fire) =
   Collision_system.(register (e :> t));
   e
   
-
+(*
   let pieges () = 
     List.map piege Cst.[ 
       (150, 500 - (hwall_height / 2), piegef_color, 100, hwall_height / 2, true);  (* Piège feu *)
@@ -22,4 +22,4 @@ let piege (x, y, txt, width, height, fire) =
       (270, 340 - (hwall_height / 2), piegef_color, 150, hwall_height / 2, true);  (* Piège feu *)
       (520, 260 - (hwall_height / 2), piegew_color, 150, hwall_height / 2, false); (* Piège eau *)
     ]
-  
+  *)

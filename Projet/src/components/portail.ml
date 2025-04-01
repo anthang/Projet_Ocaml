@@ -13,10 +13,11 @@ let portail (dx, dy, txt,fx,fy) =
   Draw_system.(register (e :> t));
   Collision_system.(register (e :> t));
   e
-
+(*
 let portails () = 
   List.map portail [ 
     (305, 230, Texture.blue,300-Cst.paddle_width-5,230);
-    (300, 230, Texture.red,310,230);
+    (300, 230, Texture.red,305+Cst.paddle_width+5,230);
 
   ]
+*)
