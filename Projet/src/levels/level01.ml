@@ -53,13 +53,14 @@ let swalls () =
     
     
 
-let pieges () = 
-  List.map Piege.piege Cst.[ 
-    (150, 500 - (hwall_height / 2), piegef_color, 100, hwall_height / 2, true);  (* Piège feu *)
-    (550, 420 - (hwall_height / 2), piegew_color, 100, hwall_height / 2, false); (* Piège eau *)
-    (270, 340 - (hwall_height / 2), piegef_color, 150, hwall_height / 2, true);  (* Piège feu *)
-    (520, 260 - (hwall_height / 2), piegew_color, 150, hwall_height / 2, false); (* Piège eau *)
-  ]
+  let pieges () = 
+    List.map Piege.piege Cst.[ 
+      (150, 500, piegef_color, 100, hwall_height / 2, true);
+      (550, 420, piegew_color, 100, hwall_height / 2, false);
+      (270, 340, piegef_color, 150, hwall_height / 2, true);
+      (520, 260, piegew_color, 150, hwall_height / 2, false);
+    ]
+  
 
 let monsters () =
   let monster_list = List.map Monster.monster Cst.[

@@ -10,8 +10,7 @@ let piege (x, y, txt, width, height, fire) =
   e#position#set Vector.{x = float x; y = float y};
   e#tag#set (if fire then FPiege e else WPiege e);
   e#box#set Rect.{width=width; height=height};
-  Draw_system.(register (e :> t));
-  Collision_system.(register (e :> t));
+
   e
   
 (*

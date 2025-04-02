@@ -35,7 +35,7 @@ let run () =
   let _monsters = Monster.monsters() in
   let _monsters = Portail.portails() in
   *)
-  Level.load_level 1 ;
+  Level.load_level 1;
 
   let player1, player2 = Player.players () in
   let door1, door2 = Door.doors ()  in

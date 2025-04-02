@@ -10,8 +10,7 @@ let portail (dx, dy, txt,fx,fy) =
   e#position_fin#set Vector.{x = float fx; y = float fy};
   e#tag#set (Portail e);
   e#box#set Rect.{width = 5; height = Cst.paddle_height+3};
-  Draw_system.(register (e :> t));
-  Collision_system.(register (e :> t));
+
   e
 (*
 let portails () = 

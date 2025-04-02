@@ -15,8 +15,7 @@ let swall (dx, dy, txt, width, height, fx, fy) =
   e#tag#set (SWall e);
   e#box#set Rect.{ width; height };
   e#velocity#set Vector.zero;
-  Collision_system.(register (e :> t));
-  Draw_system.(register (e :> t));
+
   e
 
 (*

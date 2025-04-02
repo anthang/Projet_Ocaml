@@ -8,9 +8,12 @@ type t = {
   door1 : door;
   door2 : door;
   (*ball : ball;*)
-  current_level : int;
+  mutable current_level : int;
   mutable waiting : int;
 }
+
+val get_current_level : t -> int
+val set_level : t -> int -> unit 
 
 val get : unit -> t
 val set : t -> unit

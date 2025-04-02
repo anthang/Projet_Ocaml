@@ -16,7 +16,7 @@ let window_height = 600
 let paddle_width = 20
 let paddle_height = 30
 
-let wall_thickness = 30
+let wall_thickness = 10
 
 let hwall_width = window_width
 let hwall_height = wall_thickness

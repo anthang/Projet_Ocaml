@@ -22,7 +22,7 @@ let d2 = door2() in
 let collisions d p =
   let px = Vector.getx p and py = Vector.gety p in
   let dx = Vector.getx d and dy = Vector.gety d in
-  let margin = 3. in
+  let margin = 0. in
 
   (dy -. margin <= py && py <= dy +. float Cst.door_height +. margin)
   &&
@@ -40,14 +40,21 @@ let door (x, y,h,w, txt, fire) =
   e#resolve#set (fun _ t ->
     let d1, d2 = get_positionD() in 
     let p1, p2 = Player.get_positionP() in
-    if(collisions d1 p1 && collisions d2 p2) then 
+    if(collisions d1 p1 &&  collisions d2 p2) then 
       begin
-        let g = Global.get () in
-        let g_next = { g with current_level = g.current_level + 1 } in
-        Global.set g_next;
-        Level.load_level g.current_level ;
+        Player.player_fin();
+        Gfx.debug"avant_unload";
+        Level.unload_level();
+        Gfx.debug"apres_unload";
+        let g = Global.get() in
+        Gfx.debug"avant_load";
+        let next_lvl = (Global.get_current_level g) + 1 in
+        Global.set_level g next_lvl;
+        Level.load_level next_lvl ;
+        Gfx.debug"apres_load";
       end   
   else
+    Gfx.debug"else";
       ()
   );
   e

@@ -13,8 +13,7 @@ let diamont (x, y, txt, fire) =
   e#position#set Vector.{x = float x; y = float y};
   e#tag#set (if fire then DiamontW e else DiamontF e);
   e#box#set Rect.{width = 10; height = 10};
-  Draw_system.(register (e :> t));
-  Collision_system.(register (e :> t));
+
 
   (* Gestion des collisions pour supprimer le diamant et augmenter le score *)
   e#resolve#set (fun _ t ->

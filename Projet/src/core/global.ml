@@ -7,13 +7,17 @@ type t = {
   player2 : player;
   door1 : door;
   door2 : door;
-  current_level : int;
+  mutable current_level : int;
   
  (* ball : ball;*)
   mutable waiting : int;
 }
 
 let state = ref None
+let get_current_level g =
+  g.current_level
+let set_level g v =
+  g.current_level <- v
 
 let get () : t =
   match !state with

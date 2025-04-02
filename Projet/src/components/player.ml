@@ -5,17 +5,7 @@ open System_defs
 type tag += Fire of player | Water of player
 
 
-let stop_players () = 
-  let Global.{player1; player2; _ } = Global.get () in
-  player1#velocity#set Vector.zero ;
-  player2#velocity#set Vector.zero  (* À remplacer en question 7.5, mettre la vitesse
-        à 0 *)
 
-let game_over () =
-  Gfx.debug "Game Over ! Ctrl + r pour recommencé";
-  (*Gfx.debug "score : %a\n%!" Vector.pp player#velocity#get; *)
-  stop_players ();
-  Unix.sleep 1  
 
 let player_fin () =
   let Global.{player1; player2; _ } = Global.get () in
@@ -68,16 +58,14 @@ let player (name, x, y, txt, width, height,fire) =
 
       | Piege.FPiege fp -> if e#tag#get = Water  e then begin
         Draw_system.(unregister (e :> t));  
-        Unix.sleep 1;
-        game_over();
+
       end
     else
       ()
 
       | Piege.WPiege wp -> if e#tag#get = Fire e then begin
         Draw_system.(unregister (e :> t));  
-        Unix.sleep 1;
-        game_over();
+
       end
     else
       ()
@@ -110,8 +98,7 @@ let player (name, x, y, txt, width, height,fire) =
         ;
         |Monster.Monster _ ->
           Draw_system.(unregister (e :> t));  
-          Unix.sleep 1;
-          game_over();
+
         |Portail.Portail p ->
           e#position#set p#position_fin#get
   

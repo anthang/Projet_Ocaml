@@ -9,8 +9,7 @@ let wall (x, y, txt, width, height) =
   e#position#set Vector.{x = float x; y = float y};
   e#tag#set (Wall e);
   e#box#set Rect.{width; height};
-  Draw_system.(register (e :> t));
-  Collision_system.(register (e :> t));
+
   e
 (*
 let walls () = 
