@@ -20,13 +20,13 @@ let d2 = door2() in
 (d1#position#get, d2#position#get)
 
 let collisions d p =
-  let px = Vector.getx p and py = Vector.gety p in
+  let px = Vector.getx p +. float Cst.paddle_width/.2. and py = Vector.gety p +. float Cst.paddle_height /. 2. in
   let dx = Vector.getx d and dy = Vector.gety d in
-  let margin = 0. in
 
-  (dy -. margin <= py && py <= dy +. float Cst.door_height +. margin)
+
+  (dy  <= py && py <= dy +. float Cst.door_height )
   &&
-  (dx -. margin <= px && px <= dx +. float Cst.door_width +. margin)
+  (dx  <= px && px <= dx +. float Cst.door_width )
 
 
 let door (x, y,h,w, txt, fire) =
@@ -61,8 +61,8 @@ let door (x, y,h,w, txt, fire) =
 
 
 let doors () = 
-      door Cst.(doorf_x, doorf_y,door_height,door_width, doorf_color, true),
-      door Cst.(doorw_x, doorw_y,door_height,door_width, doorw_color, false)
+      door Cst.(250, 35,door_height,door_width, doorf_color, true),
+      door Cst.(530, 35,door_height,door_width, doorw_color, false)
 
 
     

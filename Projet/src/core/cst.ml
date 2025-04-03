@@ -16,7 +16,7 @@ let window_height = 600
 let paddle_width = 20
 let paddle_height = 30
 
-let wall_thickness = 10
+let wall_thickness = 20
 
 let hwall_width = window_width
 let hwall_height = wall_thickness
@@ -29,11 +29,11 @@ let paddle2_y = paddle1_y
 let paddle_color = Texture.blue
 
 let paddle_v_up = Vector.{ x = 0.0; y = -3.0 }
-let paddle_v_right = Vector.{ x = 3.0; y = 0.0 }
+let paddle_v_right = Vector.{ x = 3.5; y = 0.0 }
 
 (*let paddle_v_down = Vector.sub Vector.zero paddle_v_up*)
 let gravitie = Vector.{x=0.;y=0.05}
-let paddle_v_left = Vector.{ x = -3.0; y = 0.0 }
+let paddle_v_left = Vector.{ x = -3.5; y = 0.0 }
 
 let ball_size = 24
 let ball_color = Texture.red

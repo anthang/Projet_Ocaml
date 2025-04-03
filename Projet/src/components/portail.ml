@@ -9,7 +9,7 @@ let portail (dx, dy, txt,fx,fy) =
   e#position#set Vector.{x = float dx; y = float dy};
   e#position_fin#set Vector.{x = float fx; y = float fy};
   e#tag#set (Portail e);
-  e#box#set Rect.{width = 5; height = Cst.paddle_height+3};
+  e#box#set Rect.{width = 5; height = Cst.paddle_height+5};
 
   e
 (*

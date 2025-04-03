@@ -114,8 +114,8 @@ let player (name, x, y, txt, width, height,fire) =
   e
 
 let players () =  
-  player  Cst.("Fire" , paddle1_x, paddle1_y, Texture.red , paddle_width, paddle_height,true ),
-  player  Cst.("Water", paddle2_x, paddle2_y, Texture.blue, paddle_width, paddle_height,false)
+  player  Cst.("Fire" , 50, 500, Texture.red , paddle_width, paddle_height,true ),
+  player  Cst.("Water", 750, 500, Texture.blue, paddle_width, paddle_height,false)
 
 let player1 () = 
   let Global.{player1; _ } = Global.get () in

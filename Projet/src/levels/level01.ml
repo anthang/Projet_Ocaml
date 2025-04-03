@@ -5,96 +5,155 @@ open System_defs
 
 (*---------------------------LEVEL01-------------------------------*)
 
-let walls () = 
+(* --------------------- *)
+(*      W A L L S       *)
+(* --------------------- *)
+let walls () =
 
-    List.map Wall.wall Cst.[ 
-      (* Bord*)
-      (hwall1_x, hwall1_y, hwall_color, hwall_width, hwall_height);
-      (hwall2_x, hwall2_y, hwall_color, hwall_width, hwall_height);
-      (vwall1_x, vwall1_y, vwall_color, wall_thickness, window_height - 2 * wall_thickness);
-      (vwall2_x, vwall2_y, vwall_color, wall_thickness, window_height - 2 * wall_thickness);
+
   
-      (* Plateformes principales *)
-      (100, 500, hwall_color, 200, hwall_height); 
-      (500, 500, hwall_color, 200, hwall_height); 
-  
-      (250, 420, hwall_color, 300, hwall_height); 
-      
-      (100, 340, hwall_color, 200, hwall_height);  
-      (500, 340, hwall_color, 200, hwall_height);
-  
-      (300, 260, hwall_color, 200, hwall_height); 
-      
-      (120, 180, hwall_color, 150, hwall_height); 
-      (520, 180, hwall_color, 150, hwall_height);  
-  
-      (320, 100, hwall_color, 160, hwall_height);  
-  
-      (* Murs sous les pièges *)
-      (150, 500, hwall_color, 100, hwall_height / 2);
-      (550, 420, hwall_color, 100, hwall_height / 2);
-      (270, 340, hwall_color, 150, hwall_height / 2);
-      (520, 260, hwall_color, 150, hwall_height / 2);
-  
+  List.map Wall.wall Cst.[
+
+    (* Bords extérieurs *)
+    (hwall1_x, hwall1_y, hwall_color, hwall_width, hwall_height);                  (* Mur horizontal du haut *)
+    (hwall2_x, hwall2_y, hwall_color, 200, hwall_height);   
+    (600, hwall2_y, hwall_color, 200, hwall_height);           
+    (200, hwall2_y+hwall_height/2, hwall_color, 400, hwall_height/2); 
+    (395,550, hwall_color, 10,50 ); 
+              (* Mur horizontal du bas *)
+    (vwall1_x, vwall1_y, vwall_color, wall_thickness, window_height - 2*wall_thickness); (* Mur vertical gauche *)
+    (vwall2_x, vwall2_y, vwall_color, wall_thickness, window_height - 2*wall_thickness); (* Mur vertical droit *)
+
+
+    (* 1) Deux plateformes symétriques en bas (à ~y=550 pour un écran de 600px de haut). *)
+    (110, 530, hwall_color, 100, hwall_height);  (* Plateforme de gauche *)
+    (590, 530, hwall_color, 100, hwall_height);  (* Plateforme de droite *)
+
+
+
+    (110, 400, hwall_color, 100, hwall_height);  (* Plateforme de gauche *)
+    (590, 400, hwall_color, 100, hwall_height);  (* Plateforme de droite *)
+
+
+    
+    (* 2) Un mur horizontal fixe au-dessus du swall (par exemple vers y=400). *)
+    (190, 330, hwall_color, 420, hwall_height);
+
+    (* 3) Un mur vertical au centre qui sépare la partie supérieure (on le place vers x=395, y=100). 
+       Il fait 10px de large et 200px de haut (à adapter si besoin). *)
+    (395, 20, vwall_color, wall_thickness,320);
+
+    (110, 250, hwall_color, 100, hwall_height);  (* Plateforme de gauche *)
+    (590, 250, hwall_color, 100, hwall_height);  (* Plateforme de droite *)
+
+
+
+    (20, 200, hwall_color, 100, hwall_height);  (* Plateforme de gauche *)
+    (680, 200, hwall_color, 100, hwall_height);  (* Plateforme de droite *)
+
+
+    (250, 85, hwall_color, 300, hwall_height);
+
+  ]
+
+(* -------------------------- *)
+(*  S I N K I N G  W A L L S  *)
+(* -------------------------- *)
+
+  let swalls () =
+    let swall_list = List.map Sinking_wall.swall Cst.[
+      (* 1) Swall horizontal entre les deux plateformes du bas. 
+            Disons qu’il se trouve entre x=300, y=520, 
+            a une largeur de 200px (assez pour relier ~x=200 à x=400), 
+            hauteur = hwall_height (20). 
+         - Les deux derniers paramètres (x2, y2) définissent la position-cible 
+           s’il y a un mouvement (par ex. coulissement vers le haut). 
+         - Adapte en fonction du comportement que tu veux (ici, je mets un petit mouvement). *)
+
+
+      (230, 470, Texture.yellow, 100, hwall_height, 470, 470);
+
+
+
 
     ]
-
-
-let swalls () =
-  let swall_list = List.map Sinking_wall.swall Cst.[
-    (100, 100, Texture.yellow, 20, 10,600, 100);
-   
-  ] in
-
-  List.iteri (fun i sw ->
-    Hashtbl.add Sinking_wall.swall_table i sw
-  ) swall_list;
-  swall_list
+    in
+    (* On enregistre chaque swall dans la table correspondante *)
+    List.iteri (fun i sw -> Hashtbl.add Sinking_wall.swall_table i sw) swall_list;
+    swall_list
     
-    
-
-  let pieges () = 
-    List.map Piege.piege Cst.[ 
-      (150, 500, piegef_color, 100, hwall_height / 2, true);
-      (550, 420, piegew_color, 100, hwall_height / 2, false);
-      (270, 340, piegef_color, 150, hwall_height / 2, true);
-      (520, 260, piegew_color, 150, hwall_height / 2, false);
-    ]
-  
-
+(* --------------------- *)
+(*       P I E G E S    *)
+(* --------------------- *)
+let pieges () =
+  List.map Piege.piege Cst.[
+    (* Exemple :
+       On place un piège (spikes, lave, etc.) vers x=380, y=560,
+       avec une largeur = 40 et une hauteur = 20 (selon vos besoins).
+       À adapter selon le type attendu par Piege.piege et la taille souhaitée.
+    *)
+    (200, 585, Texture.blue, 195, 5,false);
+    (405, 585, Texture.red, 195, 5,true);
+  ]
+(* --------------------- *)
+(*    M O N S T E R S   *)
+(* --------------------- *)
 let monsters () =
-  let monster_list = List.map Monster.monster Cst.[
-    (520, 170, Texture.black, 20, 10, 650, 170);
-  ] in
-  List.iteri (fun i m ->
-    Hashtbl.add Monster.monster_table () m
-  ) monster_list;
+  let monster_list =
+    List.map Monster.monster Cst.[
+      (* L’utilisateur n’a pas mentionné de monstres spécifiques, on laisse vide 
+         ou on en ajoute si besoin. *)
+    ]
+  in
+  (* On pourrait remplir la monster_table si nécessaire *)
+  List.iteri (fun i m -> Hashtbl.add Monster.monster_table () m) monster_list;
   monster_list
 
-  let diamonts () =
+(* --------------------- *)
+(*   D I A M O N T S     *)
+(* --------------------- *)
+let diamonts () =
+  List.map Diamont.diamont Cst.[
+    (* 1) Au-dessus des plateformes du bas (x=110, y=530) et (x=590, y=530). *)
+    (160, 500, Texture.red,true);  (* Centre approx. : 110 + (100/2) = 160, 530 - 30 = 500 *)
+    (640, 500, Texture.red,true);  (* Pareil pour x=590 + 50 = 640, y=500 *)
 
-    List.map Diamont.diamont Cst.[
-      (* Diamants sur les plateformes principales *)
-      (120, 500 - 20, diamontf_color, true);  
-      (520, 500 - 20, diamontw_color, false);  
-  
-      (280, 420 - 20, diamontf_color, true);  
-      (350, 420 - 20, diamontw_color, false);
-  
-      (130, 340 - 20, diamontw_color, false);  
-      (530, 340 - 20, diamontf_color, true); 
-  
-      (320, 260 - 20, diamontf_color, true);  
-  
-      (140, 180 - 20, diamontw_color, false);  
-      (540, 180 - 20, diamontf_color, true);  
-  
-      (350, 100 - 20, diamontw_color, false);  
-    ]
+    (* 2) Au-dessus des plateformes à (110,400) et (590,400). *)
+    (160, 370, Texture.blue,false);
+    (640, 370, Texture.blue,false);
 
-let portails () = 
-  List.map Portail.portail [ 
-    (305, 230, Texture.blue,300-Cst.paddle_width-5,230);
-    (300, 230, Texture.red,305+Cst.paddle_width+5,230);
+    (* 3) Au-dessus du grand mur horizontal (190,330) de largeur 420.
+       Centre horizontal ~ 190 + (420 / 2) = 400, en l’élevant ~30px au-dessus. *)
+    (400, 300, Texture.red,true);
+
+    (* 4) Au-dessus des plateformes à (110, 250) et (590, 250). *)
+    (160, 220, Texture.red,true);
+    (640, 220, Texture.blue,false);
+
+    (* 5) Au-dessus des plateformes à (20, 200) et (680, 200). *)
+    (70, 170, Texture.red,true);
+    (730, 170, Texture.red,true);
+
+    (* 6) Au-dessus de la plateforme à (250, 85), de largeur 300.
+       Centre ~ 250 + (300 / 2) = 400. On place le diamant 30px plus haut => y=55. *)
+    (400, 55, Texture.blue,false);
+  ]
+(* --------------------- *)
+(*   P O R T A I L S     *)
+(* --------------------- *)
+let portails () =
+  List.map Portail.portail [
+    (* Portail en haut du mur vertical central (exemple : deux moitiés autour de x=400, y=90). 
+       On reprend la convention : (x, y, texture, x2, y2). 
+       Par exemple, on place un demi-portail bleu et un rouge à proximité. *)
+    (390,295, Texture.blue, 421, 295);
+    (415, 295 , Texture.red, 390-Cst.paddle_width-1, 295);
+
+
+    (20,165, Texture.blue, 421, 295);
+    (390,50 , Texture.red, 390-Cst.paddle_width-1, 295);
+  
+    (775,165, Texture.blue, 415, 50);
+    (415,50 , Texture.red, 20-Cst.paddle_width-1, 156);
 
   ]
