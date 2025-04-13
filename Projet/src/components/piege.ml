@@ -1,14 +1,14 @@
 open Component_defs
 open System_defs
 
-type tag += WPiege of piege | FPiege of piege
+type tag += WPiege of piege | FPiege of piege | NPiege of piege
 
-let piege (x, y, txt, width, height, fire) =
+let piege (x, y, txt, width, height, fire,water) =
 
   let e = new piege () in
   e#texture#set txt;
   e#position#set Vector.{x = float x; y = float y};
-  e#tag#set (if fire then FPiege e else WPiege e);
+  e#tag#set (if fire then FPiege e else if water then WPiege e else NPiege e );
   e#box#set Rect.{width=width; height=height};
 
   e

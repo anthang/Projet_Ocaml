@@ -24,17 +24,7 @@ let run () =
 
 
   (*let font = Gfx.load_font Cst.font_name "" 128 in*)
-  (*
-  let _walls = Wall.walls () in
 
-  (*let ball = Ball.ball ctx font in*)
-  let _diamont = Diamont.diamonts () in
-  let _piege = Piege.pieges () in
-  let _sk = Sinking_wall.swalls() in
-
-  let _monsters = Monster.monsters() in
-  let _monsters = Portail.portails() in
-  *)
   Level.load_level 1;
 
   let player1, player2 = Player.players () in

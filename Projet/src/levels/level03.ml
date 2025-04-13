@@ -34,8 +34,8 @@ let swalls () =
 let pieges () =
   List.map Piege.piege Cst.[
     (* Deux pièges au sol (feu et eau) *)
-    (200, window_height - hwall_height, piegef_color, 100,  hwall_height, true);
-    (400, window_height - hwall_height, piegew_color, 100,  hwall_height, false);
+    (200, window_height - hwall_height, piegef_color, 100,  hwall_height, true,false);
+    (400, window_height - hwall_height, piegew_color, 100,  hwall_height, false,true);
   ]
 
 let monsters () =

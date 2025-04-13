@@ -29,11 +29,11 @@ let paddle2_y = paddle1_y
 let paddle_color = Texture.blue
 
 let paddle_v_up = Vector.{ x = 0.0; y = -3.0 }
-let paddle_v_right = Vector.{ x = 3.5; y = 0.0 }
+let paddle_v_right = Vector.{ x = 5.; y = 0.0 }
 
 (*let paddle_v_down = Vector.sub Vector.zero paddle_v_up*)
 let gravitie = Vector.{x=0.;y=0.05}
-let paddle_v_left = Vector.{ x = -3.5; y = 0.0 }
+let paddle_v_left = Vector.{ x = -5.; y = 0.0 }
 
 let ball_size = 24
 let ball_color = Texture.red
@@ -98,7 +98,7 @@ let vwall_height = 10
 let doorw_x = 100
 
 let door_height = 50
-let door_width = 20
+let door_width = 40
 let doorw_y = window_height-door_height-wall_thickness
 let doorf_x = 200
 let doorf_y = doorw_y

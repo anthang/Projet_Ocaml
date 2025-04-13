@@ -69,6 +69,9 @@ let player (name, x, y, txt, width, height,fire) =
       end
     else
       ()
+      | Piege.NPiege wp -> 
+        Draw_system.(unregister (e :> t))
+        
       |Sinking_wall.SWall sw -> 
         begin
           let player_pos = e#position#get in
@@ -143,7 +146,7 @@ let move_player player v =
   *)
 
   let new_v = 
-    if(Vector.gety player#velocity#get >= 0.1
+    if(Vector.gety player#velocity#get >= 0.2
       &&Vector.gety player#velocity#get <=0.3) then(
       v
     ) else

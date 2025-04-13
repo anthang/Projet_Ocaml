@@ -37,6 +37,8 @@ let move_swalls () =
     let origin = sw#position_origin#get in
     let current = sw#position#get in
     let fin = sw#position_fin#get in
+    Random.self_init () ;
+    let multiplicateur = float (Random.int 200 )/. 100. in
     let direction = Vector.normalize (Vector.sub fin origin) in
     let dist_to_origin = Vector.norm (Vector.sub current origin) in
     let dist_to_fin = Vector.norm (Vector.sub current fin) in
@@ -44,6 +46,6 @@ let move_swalls () =
       sw#velocity#set (Vector.mult (-1.) direction)
     else if dist_to_origin < 1.0 then
       sw#velocity#set direction;
-    let new_velo = sw#velocity#get in
+    let new_velo = Vector.mult multiplicateur (sw#velocity#get)  in
     sw#position#set (Vector.add current new_velo)
   ) swall_table

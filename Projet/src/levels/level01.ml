@@ -43,8 +43,8 @@ let walls () =
        Il fait 10px de large et 200px de haut (à adapter si besoin). *)
     (395, 20, vwall_color, wall_thickness,320);
 
-    (110, 250, hwall_color, 100, hwall_height);  (* Plateforme de gauche *)
-    (590, 250, hwall_color, 100, hwall_height);  (* Plateforme de droite *)
+    (20, 250, hwall_color, 190, hwall_height);  (* Plateforme de gauche *)
+    (590, 250, hwall_color, 190, hwall_height);  (* Plateforme de droite *)
 
 
 
@@ -92,8 +92,8 @@ let pieges () =
        avec une largeur = 40 et une hauteur = 20 (selon vos besoins).
        À adapter selon le type attendu par Piege.piege et la taille souhaitée.
     *)
-    (200, 585, Texture.blue, 195, 5,false);
-    (405, 585, Texture.red, 195, 5,true);
+    (200, 585, Texture.blue, 195, 5,false,true);
+    (405, 585, Texture.red, 195, 5,true,false);
   ]
 (* --------------------- *)
 (*    M O N S T E R S   *)
@@ -146,14 +146,16 @@ let portails () =
     (* Portail en haut du mur vertical central (exemple : deux moitiés autour de x=400, y=90). 
        On reprend la convention : (x, y, texture, x2, y2). 
        Par exemple, on place un demi-portail bleu et un rouge à proximité. *)
-    (390,295, Texture.blue, 421, 295);
-    (415, 295 , Texture.red, 390-Cst.paddle_width-1, 295);
 
 
-    (20,165, Texture.blue, 421, 295);
-    (390,50 , Texture.red, 390-Cst.paddle_width-1, 295);
+    (390,295, Texture.blue, 415+Cst.paddle_width+1, 295);
+    (415, 295 , Texture.blue, 390-Cst.paddle_width-1, 295);
+
+
+    (20,165, Texture.red, 390-Cst.paddle_width-1, 50);
+    (390,50 , Texture.red, 20+Cst.paddle_width+1, 165);
   
-    (775,165, Texture.blue, 415, 50);
-    (415,50 , Texture.red, 20-Cst.paddle_width-1, 156);
+    (775,165, Texture.black, 415+Cst.paddle_width+1, 50);
+    (415,50 , Texture.black, 775-Cst.paddle_width-1, 165);
 
   ]
