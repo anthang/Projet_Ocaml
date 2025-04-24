@@ -1,0 +1,2 @@
+PlayerFire,player_fire.png
+PlayerWater,player_water.png

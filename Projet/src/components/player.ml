@@ -1,9 +1,11 @@
 open Ecs
 open Component_defs
 open System_defs
+open Assets 
 
 type tag += Fire of player | Water of player
-
+let sprite_w = 20
+let sprite_h = 30
 
 
 
@@ -117,8 +119,10 @@ let player (name, x, y, txt, width, height,fire) =
   e
 
 let players () =  
-  player  Cst.("Fire" , 50, 500, Texture.red , paddle_width, paddle_height,true ),
-  player  Cst.("Water", 750, 500, Texture.blue, paddle_width, paddle_height,false)
+  (*player  Cst.("Fire" , 50, 500, Texture.red , paddle_width, paddle_height,true ),
+  player  Cst.("Water", 750, 500, Texture.blue, paddle_width, paddle_height,false)*)
+  player ("Fire",  50, 500, Assets.get PlayerFire,  sprite_w, sprite_h, true),
+  player ("Water", 750, 500, Assets.get PlayerWater, sprite_w, sprite_h, false)
 
 let player1 () = 
   let Global.{player1; _ } = Global.get () in
