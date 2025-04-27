@@ -4,8 +4,8 @@ open System_defs
 open Assets 
 
 type tag += Fire of player | Water of player
-let sprite_w = 20
-let sprite_h = 30
+let sprite_w = 25
+let sprite_h = 35
 
 
 

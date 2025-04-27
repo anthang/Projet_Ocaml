@@ -74,7 +74,13 @@ let get k             = Hashtbl.find _tbl k     (* récupère la texture *)
    open Texture
    
    (** Les seules textures nécessaires pour l’instant. *)
-   type key = PlayerFire | PlayerWater
+   type key =
+   | PlayerFire
+   | PlayerWater
+   | DiamantFire          
+   | DiamantWater         
+   | DoorFire             
+   | DoorWater
    
    let _tbl : (key, Texture.t) Hashtbl.t = Hashtbl.create 4
    
@@ -88,6 +94,8 @@ let get k             = Hashtbl.find _tbl k     (* récupère la texture *)
      in
      load PlayerFire  "player_fire.png";
      load PlayerWater "player_water.png";
+     load DiamantFire  "diamont_fire.png";
+     load DiamantWater "diamont_water.png";
      ()
    
    let get k = Hashtbl.find _tbl k

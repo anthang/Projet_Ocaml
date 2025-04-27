@@ -1,6 +1,7 @@
 open Ecs
 open Component_defs
 open System_defs
+open Assets 
 
 
 (*---------------------------LEVEL01-------------------------------*)
@@ -115,28 +116,28 @@ let monsters () =
 let diamonts () =
   List.map Diamont.diamont Cst.[
     (* 1) Au-dessus des plateformes du bas (x=110, y=530) et (x=590, y=530). *)
-    (160, 500, Texture.red,true);  (* Centre approx. : 110 + (100/2) = 160, 530 - 30 = 500 *)
-    (640, 500, Texture.red,true);  (* Pareil pour x=590 + 50 = 640, y=500 *)
+    (160, 500, Assets.get DiamantFire,true);  (* Centre approx. : 110 + (100/2) = 160, 530 - 30 = 500 *)
+    (640, 500, Assets.get DiamantFire,true);  (* Pareil pour x=590 + 50 = 640, y=500 *)
 
     (* 2) Au-dessus des plateformes à (110,400) et (590,400). *)
-    (160, 370, Texture.blue,false);
-    (640, 370, Texture.blue,false);
+    (160, 370, Assets.get DiamantWater,false);
+    (640, 370, Assets.get DiamantWater,false);
 
     (* 3) Au-dessus du grand mur horizontal (190,330) de largeur 420.
        Centre horizontal ~ 190 + (420 / 2) = 400, en l’élevant ~30px au-dessus. *)
-    (400, 300, Texture.red,true);
+    (400, 300, Assets.get DiamantFire,true);
 
     (* 4) Au-dessus des plateformes à (110, 250) et (590, 250). *)
-    (160, 220, Texture.red,true);
-    (640, 220, Texture.blue,false);
+    (160, 220, Assets.get DiamantFire,true);
+    (640, 220, Assets.get DiamantWater,false);
 
     (* 5) Au-dessus des plateformes à (20, 200) et (680, 200). *)
-    (70, 170, Texture.red,true);
-    (730, 170, Texture.red,true);
+    (70, 170, Assets.get DiamantFire,true);
+    (730, 170, Assets.get DiamantFire,true);
 
     (* 6) Au-dessus de la plateforme à (250, 85), de largeur 300.
        Centre ~ 250 + (300 / 2) = 400. On place le diamant 30px plus haut => y=55. *)
-    (400, 55, Texture.blue,false);
+    (400, 55, Assets.get DiamantWater,false);
   ]
 (* --------------------- *)
 (*   P O R T A I L S     *)

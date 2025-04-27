@@ -12,7 +12,7 @@ let diamont (x, y, txt, fire) =
   e#texture#set txt;
   e#position#set Vector.{x = float x; y = float y};
   e#tag#set (if fire then DiamontW e else DiamontF e);
-  e#box#set Rect.{width = 10; height = 10};
+  e#box#set Rect.{width = 20; height = 20};
 
 
   (* Gestion des collisions pour supprimer le diamant et augmenter le score *)
