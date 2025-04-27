@@ -14,8 +14,6 @@
    | DiamantWater         
    | DoorFire             
    | DoorWater
-   | PortalFire
-   | PortalWater
    
    let _tbl : (key, Texture.t) Hashtbl.t = Hashtbl.create 4
    
@@ -33,8 +31,6 @@
      load DiamantWater "diamont_water.png";
      load DoorFire "door_fire.png";
      load DoorWater "door_water.png";
-     load PortalFire "potail_fire.png";
-     load PortalWater "potail_water.png";
 
      ()
    
