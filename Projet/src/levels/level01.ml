@@ -102,8 +102,7 @@ let pieges () =
 let monsters () =
   let monster_list =
     List.map Monster.monster Cst.[
-      (* L’utilisateur n’a pas mentionné de monstres spécifiques, on laisse vide 
-         ou on en ajoute si besoin. *)
+      (* il y en a pas pour ce niveau*)
     ]
   in
   (* On pourrait remplir la monster_table si nécessaire *)

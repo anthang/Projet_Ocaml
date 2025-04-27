@@ -18,10 +18,10 @@ Objectifs pédagogiques :
 
 ## 2 | Organisation et répartition du travail  
 
-| Auteur Git | Commits | Tâches dominantes |
-|------------|---------|-------------------|
-| **anthang** | 40 / 42 | `physics.ml`, `collision.ml`, `input.ml`, trois niveaux, tests, CI, documentation |
-| **Lynn159** | 2 / 42 | Squelette initial (ECS / SDL), assets PNG, validation gameplay |
+| Auteur Git  | Tâches dominantes |
+|------------|-------------------|
+| **anthang**  | `physics.ml`, `collision.ml`, `input.ml`, trois niveaux, tests, CI, documentation |
+| **Lynn159**  | Squelette initial (ECS / SDL), assets PNG, validation gameplay |
 
 ---
 

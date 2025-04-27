@@ -1,6 +1,7 @@
 open Ecs
 open Component_defs
 open System_defs
+open Assets 
 
 type tag += DoorW of door | DoorF of door
 
@@ -66,5 +67,5 @@ let door (x, y,h,w, txt, fire) =
 
 
 let doors () = 
-      door Cst.(250, 35,door_height,door_width, doorf_color, true),
-      door Cst.(510, 35,door_height,door_width, doorw_color, false)
+      door Cst.(250, 35,door_height,door_width, Assets.get DoorFire, true),
+      door Cst.(510, 35,door_height,door_width, Assets.get DoorWater, false)

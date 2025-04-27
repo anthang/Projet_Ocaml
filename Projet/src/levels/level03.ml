@@ -1,6 +1,7 @@
 open Ecs
 open Component_defs
 open System_defs
+open Assets 
 
 let walls () =
   List.map Wall.wall Cst.[
@@ -51,13 +52,13 @@ let monsters () =
 let diamonts () =
   List.map Diamont.diamont Cst.[
     (* Quelques diamants dispersés sur les plates-formes *)
-    (120, 500 - 20, diamontf_color, true);      (* Sur la plate-forme y=500 *)
-    (270, 490 - 20, diamontw_color, false);     (* Sur la plate-forme y=490 *)
-    (420, 480 - 20, diamontf_color, true);      
-    (570, 470 - 20, diamontw_color, false);
-    (470, 410 - 20, diamontf_color, true);
-    (320, 350 - 20, diamontw_color, false);
-    (170, 290 - 20, diamontf_color, true);
+    (120, 500 - 20, Assets.get DiamantFire, true);      (* Sur la plate-forme y=500 *)
+    (270, 490 - 20, Assets.get DiamantWater, false);     (* Sur la plate-forme y=490 *)
+    (420, 480 - 20, Assets.get DiamantFire, true);      
+    (570, 470 - 20, Assets.get DiamantWater, false);
+    (470, 410 - 20, Assets.get DiamantFire, true);
+    (320, 350 - 20, Assets.get DiamantWater, false);
+    (170, 290 - 20, Assets.get DiamantFire, true);
   ]
 
 let portails () =

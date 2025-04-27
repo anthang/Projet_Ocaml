@@ -1,6 +1,8 @@
 open Ecs
 open Component_defs
 open System_defs
+open Assets 
+
 let walls () =
   List.map Wall.wall Cst.[
     (* Bords extérieurs *)
@@ -120,45 +122,45 @@ let monsters () =
   let diamonts () =
     List.map Diamont.diamont Cst.[
       (*les 2 premier diamants*)
-      (425, 540, diamontf_color, true);  
-      (535, 540, diamontw_color, false); 
+      (425, 540, Assets.get DiamantFire, true);  
+      (535, 540, Assets.get DiamantWater, false); 
 
       (*au dessus du piege noire*)
-      (340, 390, diamontf_color, true);
-      (380, 390, diamontw_color, false);
-      (420, 390, diamontf_color, true);
-      (460, 390, diamontw_color, false);
+      (340, 390, Assets.get DiamantFire, true);
+      (380, 390, Assets.get DiamantWater, false);
+      (420, 390, Assets.get DiamantFire, true);
+      (460, 390, Assets.get DiamantWater, false);
 
 
-  
-        (*dans le rectangle central*)
-      (165, 160, diamontf_color, true);
-      (315, 160, diamontw_color, false);
+    
+      (*dans le rectangle central*)
+      (165, 160, Assets.get DiamantFire, true);
+      (315, 160, Assets.get DiamantWater, false);
 
-      (165, 210, diamontf_color, true);
-      (315, 210, diamontw_color, false);
-  
-      (165, 260, diamontf_color, true);
-      (315, 260, diamontw_color, false);
-  
-      (195, 310, diamontf_color, true);
-      (345, 310, diamontw_color, false);
-  
+      (165, 210, Assets.get DiamantFire, true);
+      (315, 210, Assets.get DiamantWater, false);
+    
+      (165, 260, Assets.get DiamantFire, true);
+      (315, 260, Assets.get DiamantWater, false);
+    
+      (195, 310, Assets.get DiamantFire, true);
+      (345, 310, Assets.get DiamantWater, false);
+    
 
 
       
-      (445, 160, diamontf_color, true);
-      (595, 160, diamontw_color, false);
-  
+      (445, 160, Assets.get DiamantFire, true);
+      (595, 160, Assets.get DiamantWater, false);
+    
 
-      (495, 210, diamontf_color, true);
-      (645, 210, diamontw_color, false);
-  
-      (445, 260, diamontf_color, true);
-      (595, 260, diamontw_color, false);
-  
-      (445, 310, diamontf_color, true);
-      (595, 310, diamontw_color, false);
+      (495, 210, Assets.get DiamantFire, true);
+      (645, 210, Assets.get DiamantWater, false);
+    
+      (445, 260, Assets.get DiamantFire, true);
+      (595, 260, Assets.get DiamantWater, false);
+    
+      (445, 310, Assets.get DiamantFire, true);
+      (595, 310, Assets.get DiamantWater, false);
     ]
   
 
