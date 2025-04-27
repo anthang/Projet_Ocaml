@@ -172,11 +172,11 @@ let portails () =
        (95, 250,  Texture.blue,395-Cst.paddle_width-1, 185);
 
        (120, 315, Texture.blue,120-Cst.paddle_width-1, 185);
-       (675, 315,  Texture.red,675-Cst.paddle_width-1, 55);
+       (675, 315,  Texture.red,675-Cst.paddle_width-10, 54);
 
       (*portail tout en haut*)
        (120, 55, Texture.blue,675-Cst.paddle_width-1,315);
-       (675, 55, Texture.red, 675-Cst.paddle_width-1, 315);
+       (675, 55, Texture.red, 675-Cst.paddle_width-10, 315);
     
 
   ]

@@ -26,7 +26,7 @@ let run () =
 
   (*let font = Gfx.load_font Cst.font_name "" 128 in*)
 
-  Level.load_level 1;
+  Level.load_level 2;
 
   let player1, player2 = Player.players () in
   let door1, door2 = Door.doors ()  in
